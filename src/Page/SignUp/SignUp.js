@@ -1,12 +1,40 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { AuthContex } from '../Share/UserContex/UserContext';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const { createUser, updateUser } = useContext(AuthContex);
 
     const handleSignUp = data => {
-        console.log(data)
+        const { firstname, lastname, email, password, role, } = data;
+        const name = firstname + ' ' + lastname;
+        const user = {
+            name,
+            email,
+            role
+        }
+        createUser(email, password)
+            .then(result => {
+                updateUser(name)
+                    .then(result => { })
+                    .catch(e => console.log(e))
+                fetch('http://localhost:5000/user', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        toast.success('Sign Up Success')
+                    })
+                    .catch(e => console.log(e))
+            })
+            .catch(e => console.log(e))
     }
 
     return (
