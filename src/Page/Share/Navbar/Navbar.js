@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import laptop from '../Navbar/image/laptop.jpg'
+import { AuthContex } from '../UserContex/UserContext';
 
 const Navbar = () => {
+    const { user } = useContext(AuthContex)
 
 
     const item = <>
