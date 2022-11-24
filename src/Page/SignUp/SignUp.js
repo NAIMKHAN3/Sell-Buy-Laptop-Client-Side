@@ -6,7 +6,7 @@ import { AuthContex } from '../Share/UserContex/UserContext';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser, updateUser } = useContext(AuthContex);
+    const { createUser, updateUser, signInGoogle } = useContext(AuthContex);
 
     const handleSignUp = data => {
         const { firstname, lastname, email, password, role, } = data;
@@ -21,6 +21,32 @@ const SignUp = () => {
                 updateUser(name)
                     .then(result => { })
                     .catch(e => console.log(e))
+                fetch('http://localhost:5000/user', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        toast.success('Sign Up Success')
+                    })
+                    .catch(e => console.log(e))
+            })
+            .catch(e => console.log(e))
+    }
+
+    const handleGoogle = () => {
+        signInGoogle()
+            .then(result => {
+                const email = result.user.email;
+                const name = result.user.displayName;
+                const user = {
+                    name,
+                    email,
+                    role: "buyer"
+                }
                 fetch('http://localhost:5000/user', {
                     method: 'POST',
                     headers: {
@@ -80,7 +106,7 @@ const SignUp = () => {
             <p className='text-center'>Already Have An Account Please <Link to='/login' className='text-primary'>Log In</Link></p>
             <div className="flex flex-col w-full border-opacity-50">
                 <div className="divider">OR</div>
-                <button className="btn btn-outline btn-info w-full">Sign in Google</button>
+                <button onClick={handleGoogle} className="btn btn-outline btn-info w-full">Sign in Google</button>
             </div>
         </div>
     );
