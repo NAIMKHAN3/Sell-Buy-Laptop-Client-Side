@@ -8,7 +8,7 @@ const DeshbordLayout = () => {
             <Navbar></Navbar>
             <div className="drawer drawer-mobile">
                 <input id="deshbord-drawer" type="checkbox" className="drawer-toggle" />
-                <div style={{ overflow: 'hidden' }} className="drawer-content overflow-y-hidden flex flex-col items-center justify-center">
+                <div style={{}} className="drawer-content flex flex-col items-center justify-center">
                     <Outlet></Outlet>
                 </div>
                 <div className="drawer-side">
