@@ -5,16 +5,8 @@ import laptop from '../Navbar/image/laptop.jpg'
 import { AuthContex } from '../UserContex/UserContext';
 
 const Navbar = () => {
-    const { user } = useContext(AuthContex)
+    const { user, cetegorys } = useContext(AuthContex);
 
-    const [cetegorys, setCetegorys] = useState([]);
-
-    useEffect(() => {
-        axios.get('http://localhost:5000/cetegorys')
-            .then(res => {
-                setCetegorys(res.data)
-            })
-    }, [])
     if (!cetegorys) {
         return
     }
@@ -23,9 +15,9 @@ const Navbar = () => {
 
     const item = <>
         <Link className='mr-5 font-bold text-xl' to='/home'>Home</Link>
-        <div className="dropdown dropdown-hover">
-            <label tabIndex={0} className="mr-5 font-bold text-xl">Cetegories</label>
-            <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box ">
+        <div className="dropdown hidden lg:block dropdown-hover">
+            <label tabIndex={0} className="mr-5 cursor-pointer font-bold text-xl">Cetegories</label>
+            <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100">
                 {
                     cetegorys.map(cetegory => <li key={cetegory._id}><Link to={`/cetegory/${cetegory._id}`}>{cetegory.name}</Link></li>)
                 }
@@ -71,10 +63,9 @@ const Navbar = () => {
                 </div>
                 <div className="avatar navbar-end">
                     <div className="dropdown">
-                        <label htmlFor="deshboard-drawer" tabIndex={2} className="btn btn-ghost lg:hidden">
+                        <label htmlFor="deshbord-drawer" tabIndex={2} className="btn btn-ghost lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
-                        {/* <label  className="btn btn-primary drawer-button">Open drawer</label> */}
                         <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
 
                         </ul>

@@ -1,9 +1,10 @@
 import React from 'react';
+import DeshbordLayout from './DeshbordLayout/DeshbordLayout';
 
 const Deshboard = () => {
     return (
         <div>
-            this is deshboard section
+            <DeshbordLayout></DeshbordLayout>
         </div>
     );
 };

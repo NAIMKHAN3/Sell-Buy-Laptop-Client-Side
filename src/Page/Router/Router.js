@@ -4,6 +4,7 @@ import Main from "../Layout/Main/Main";
 import Login from "../Login/Login";
 import SignUp from "../SignUp/SignUp";
 import Deshboard from "../Layout/Deshboard/Deshboard"
+import AddProduct from "../Layout/Deshboard/AddProduct/AddProduct";
 
 export const router = createBrowserRouter([
     {
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
         ]
     },
     {
-        path: '/deshboard', element: <Deshboard></Deshboard>
+        path: '/deshboard', element: <Deshboard></Deshboard>, children: [
+            {
+                path: '/deshboard/addproduct', element: <AddProduct></AddProduct>
+            },
+        ]
     }
 ])

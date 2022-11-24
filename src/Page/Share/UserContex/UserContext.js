@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth'
 import app from '../Firebase.config';
+import axios from 'axios';
 
 
 
@@ -10,6 +11,7 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 const UserContext = ({ children }) => {
     const [user, setUser] = useState({})
+    const [cetegorys, setCetegorys] = useState([]);
 
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)
@@ -38,8 +40,20 @@ const UserContext = ({ children }) => {
         })
     }, [])
 
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/cetegorys')
+            .then(res => {
+                setCetegorys(res.data)
+            })
+    }, [])
+    if (!cetegorys) {
+        return
+    }
+
+
     return (
-        <AuthContex.Provider value={{ user, createUser, updateUser, logIn, logOut, signInGoogle }}>
+        <AuthContex.Provider value={{ user, cetegorys, createUser, updateUser, logIn, logOut, signInGoogle }}>
             {children}
         </AuthContex.Provider>
     );

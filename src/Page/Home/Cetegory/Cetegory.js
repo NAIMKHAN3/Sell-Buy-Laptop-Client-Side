@@ -1,17 +1,10 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useContext } from 'react';
+import { AuthContex } from '../../Share/UserContex/UserContext';
 import CetegoryCard from '../CetegoryCard/CetegoryCard';
 
 const Cetegory = () => {
+    const { cetegorys } = useContext(AuthContex);
 
-    const [cetegorys, setCetegorys] = useState([]);
-
-    useEffect(() => {
-        axios.get('http://localhost:5000/cetegorys')
-            .then(res => {
-                setCetegorys(res.data)
-            })
-    }, [])
     if (!cetegorys) {
         return
     }
