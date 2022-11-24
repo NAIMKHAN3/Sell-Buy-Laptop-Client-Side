@@ -1,9 +1,10 @@
 import React from 'react';
+import Cetegory from './Cetegory/Cetegory';
 
 const Home = () => {
     return (
         <div>
-            this is home
+            <Cetegory></Cetegory>
         </div>
     );
 };

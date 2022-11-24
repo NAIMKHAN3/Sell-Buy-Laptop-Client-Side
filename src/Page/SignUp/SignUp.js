@@ -14,7 +14,8 @@ const SignUp = () => {
         const user = {
             name,
             email,
-            role
+            role,
+            verified: "false"
         }
         createUser(email, password)
             .then(result => {
@@ -45,7 +46,8 @@ const SignUp = () => {
                 const user = {
                     name,
                     email,
-                    role: "buyer"
+                    role: "buyer",
+                    verified: "false"
                 }
                 fetch('http://localhost:5000/user', {
                     method: 'POST',
@@ -64,7 +66,7 @@ const SignUp = () => {
     }
 
     return (
-        <div className='w-1/3 mx-auto my-10 shadow-lg p-10'>
+        <div className='lg:w-1/3 mx-auto my-10 shadow-lg p-10'>
             <h1 className='text-center text-4xl font-bold text-orange-400'>Sign Up</h1>
             <form onSubmit={handleSubmit(handleSignUp)}>
                 <div className='flex mt-10'>

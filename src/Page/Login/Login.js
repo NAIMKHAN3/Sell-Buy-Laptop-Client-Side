@@ -23,7 +23,10 @@ const Login = () => {
                 const user = {
                     name,
                     email,
-                    role: "buyer"
+                    role: "buyer",
+                    verified: "false"
+
+
                 }
                 fetch('http://localhost:5000/user', {
                     method: 'POST',
@@ -41,7 +44,7 @@ const Login = () => {
             .catch(e => console.log(e))
     }
     return (
-        <div className='w-1/3 mx-auto my-20 shadow-lg p-10'>
+        <div className=';g:w-1/3 mx-auto my-20 shadow-lg p-10'>
             <h1 className='text-center text-4xl font-bold text-blue-500'>Log In</h1>
             <form onSubmit={handleSubmit(handleSignUp)}>
                 <div className="form-control w-full ">

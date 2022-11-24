@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import laptop from '../Navbar/image/laptop.jpg'
 import { AuthContex } from '../UserContex/UserContext';
@@ -6,9 +7,30 @@ import { AuthContex } from '../UserContex/UserContext';
 const Navbar = () => {
     const { user } = useContext(AuthContex)
 
+    const [cetegorys, setCetegorys] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/cetegorys')
+            .then(res => {
+                setCetegorys(res.data)
+            })
+    }, [])
+    if (!cetegorys) {
+        return
+    }
+
+
 
     const item = <>
         <Link className='mr-5 font-bold text-xl' to='/home'>Home</Link>
+        <div className="dropdown dropdown-hover">
+            <label tabIndex={0} className="mr-5 font-bold text-xl">Cetegories</label>
+            <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box ">
+                {
+                    cetegorys.map(cetegory => <li key={cetegory._id}><Link to={`/cetegory/${cetegory._id}`}>{cetegory.name}</Link></li>)
+                }
+            </ul>
+        </div>
         <Link className='mr-5 font-bold text-xl' to='/deshboard'>Deshboard</Link>
         <button className='mr-5 font-bold text-xl'>Log Out</button>
         <Link className='mr-5 font-bold text-xl' to='/login'>Log In</Link>
