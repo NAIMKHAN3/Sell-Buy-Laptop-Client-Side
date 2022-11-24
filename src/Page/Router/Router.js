@@ -5,6 +5,7 @@ import Login from "../Login/Login";
 import SignUp from "../SignUp/SignUp";
 import Deshboard from "../Layout/Deshboard/Deshboard"
 import AddProduct from "../Layout/Deshboard/AddProduct/AddProduct";
+import CetegoryItem from "../CetegoryItem/CetegoryItem";
 
 export const router = createBrowserRouter([
     {
@@ -14,6 +15,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/home', element: <Home></Home>
+            },
+            {
+                path: '/cetegoryitem/:id',
+
+                loader: ({ params }) => fetch(`http://localhost:5000/cetegoryitem/${params.id}`), element: <CetegoryItem></CetegoryItem>
             },
             {
                 path: '/login', element: <Login></Login>

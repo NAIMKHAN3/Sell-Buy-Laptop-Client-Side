@@ -11,14 +11,15 @@ const SignUp = () => {
     const handleSignUp = data => {
         const { firstname, lastname, email, password, role, } = data;
         const name = firstname + ' ' + lastname;
-        const user = {
-            name,
-            email,
-            role,
-            verified: "false"
-        }
+
         createUser(email, password)
             .then(result => {
+                const user = {
+                    name,
+                    email: result.user?.email,
+                    role,
+                    verified: "false"
+                }
                 updateUser(name)
                     .then(result => { })
                     .catch(e => console.log(e))

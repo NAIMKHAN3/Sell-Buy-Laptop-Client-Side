@@ -19,7 +19,7 @@ const Navbar = () => {
             <label tabIndex={0} className="mr-5 cursor-pointer font-bold text-xl">Cetegories</label>
             <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100">
                 {
-                    cetegorys.map(cetegory => <li key={cetegory._id}><Link to={`/cetegory/${cetegory._id}`}>{cetegory.name}</Link></li>)
+                    cetegorys.map(cetegory => <li key={cetegory._id}><Link to={`/cetegoryitem/${cetegory._id}`}>{cetegory.name}</Link></li>)
                 }
             </ul>
         </div>
@@ -36,7 +36,7 @@ const Navbar = () => {
         <div className='mt-7'>
             <div className='flex justify-center items-center'>
                 <img className='w-16 mr-3' src={laptop} alt="" />
-                <Link to='/'> <p className=" btn-ghost text-4xl font-bold text-orange-400 text-center">Sell-Buy-Laptop</p> </Link>
+                <Link to='/'> <p className=" btn-ghost text-4xl font-bold warning-content text-center">Sell-Buy-Laptop</p> </Link>
             </div>
             <div className="navbar bg-success px-8">
 

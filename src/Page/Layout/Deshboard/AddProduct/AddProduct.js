@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { AuthContex } from '../../../Share/UserContex/UserContext';
 
 const AddProduct = () => {
@@ -13,7 +14,7 @@ const AddProduct = () => {
     }
 
     const handleAddProduct = (data) => {
-        console.log(data)
+
         const { brand, location, use, resale, original, model } = data;
         const image = data.image[0];
         const formData = new FormData();
@@ -25,7 +26,6 @@ const AddProduct = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 const image = data.data?.url;
                 const sellername = user.displayName;
                 const selleremail = user.email;
@@ -42,8 +42,20 @@ const AddProduct = () => {
                     sellername,
                     selleremail,
                     date,
+                    status: 'true'
                 }
-                console.log(product)
+                fetch('http://localhost:5000/product', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(product)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+
+                        toast.success('Product Added a Success')
+                    })
 
             })
             .catch(e => console.log(e))
