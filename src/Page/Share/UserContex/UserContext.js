@@ -47,9 +47,6 @@ const UserContext = ({ children }) => {
                 setCetegorys(res.data)
             })
     }, [])
-    if (!cetegorys) {
-        return
-    }
 
 
     return (

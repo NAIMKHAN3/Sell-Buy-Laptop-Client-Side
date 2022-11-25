@@ -4,7 +4,6 @@ import CetegoryItemCard from './CetegoryItemCard/CetegoryItemCard';
 
 const CetegoryItem = () => {
     const products = useLoaderData();
-    console.log(products)
 
 
     return (

@@ -1,9 +1,12 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { FaCheck, FaHeart } from 'react-icons/fa';
+import { AuthContex } from '../../Share/UserContex/UserContext';
 
 const CetegoryItemCard = ({ product }) => {
-    const { image, model, location, resale, original, date, sellername, selleremail, use, status } = product;
+    const { user } = useContext(AuthContex);
+    const { image, model, location, resale, original, date, sellername, selleremail, use, status, _id } = product;
 
     const [verify, setVerify] = useState('')
     useEffect(() => {
@@ -13,6 +16,37 @@ const CetegoryItemCard = ({ product }) => {
 
             })
     }, [selleremail])
+
+    const handleWishList = () => {
+        const procced = window.confirm('Are You Sure Product Add To My WishList')
+
+        if (procced) {
+            const WishList = {
+                image, model, location, resale, original, selleremail, sellername, date, use, status, wishlistUser: user.email, productId: _id,
+            }
+            fetch('http://localhost:5000/addwishlist', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(WishList)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.acknowledged) {
+                        toast.success('Product Added A My WishList');
+                    }
+                    else {
+                        toast.error(data.message)
+                    }
+
+
+                })
+                .catch(e => console.log(e));
+
+        }
+    }
+
     // if (!verify) {
     //     return
     // }
@@ -49,7 +83,7 @@ const CetegoryItemCard = ({ product }) => {
                         </div>
                     </div>
                     <div className='mt-4 grid grid-cols-1 lg:grid-cols-3 gap-3 px-0'>
-                        <button className="btn btn-sm btn-primary inline text-ali"> <FaHeart className='inline text-pink-600 text-1xl'></FaHeart> Add To WishList</button>
+                        <button onClick={handleWishList} className="btn btn-sm btn-primary inline text-ali"> <FaHeart className='inline text-pink-600 text-1xl'></FaHeart> Add To WishList</button>
                         <button className="btn btn-sm btn-primary">Booking Now</button>
                         <button className="btn btn-sm bg-red-600 ">Report To Admin</button>
                     </div>

@@ -21,7 +21,7 @@ const DeshbordLayout = () => {
                         <li><Link to='/deshboard/alluser'>All User</Link></li>
                         <li><Link to='/deshboard/myproduct'>My Product</Link></li>
                         <li><Link to='/deshboard/mybooking'>My Booking</Link></li>
-                        <li><Link to='/deshboard/mybooking'>My WishList</Link></li>
+                        <li><Link to='/deshboard/mywishlist'>My WishList</Link></li>
                         <li><Link to='/deshboard/mybooking'>My Buyer</Link></li>
                         <li><Link to='/deshboard/mybooking'>Reports Item</Link></li>
                     </ul>

@@ -9,6 +9,7 @@ import CetegoryItem from "../CetegoryItem/CetegoryItem";
 import AllBuyer from "../Layout/Deshboard/AllBuyer/AllBuyer";
 import AllSeller from "../Layout/Deshboard/AllSeller/AllSeller";
 import AllUser from "../Layout/Deshboard/AllUser/AllUser";
+import MyWishList from "../Layout/Deshboard/MyWishList/MyWishList";
 
 export const router = createBrowserRouter([
     {
@@ -45,6 +46,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/deshboard/alluser', element: <AllUser></AllUser>
+            },
+            {
+                path: '/deshboard/mywishlist', element: <MyWishList></MyWishList>
             },
         ]
     }
