@@ -6,6 +6,7 @@ import SignUp from "../SignUp/SignUp";
 import Deshboard from "../Layout/Deshboard/Deshboard"
 import AddProduct from "../Layout/Deshboard/AddProduct/AddProduct";
 import CetegoryItem from "../CetegoryItem/CetegoryItem";
+import AllBuyer from "../Layout/Deshboard/AllBuyer/AllBuyer";
 
 export const router = createBrowserRouter([
     {
@@ -33,6 +34,9 @@ export const router = createBrowserRouter([
         path: '/deshboard', element: <Deshboard></Deshboard>, children: [
             {
                 path: '/deshboard/addproduct', element: <AddProduct></AddProduct>
+            },
+            {
+                path: '/deshboard/allbuyer', element: <AllBuyer></AllBuyer>
             },
         ]
     }
