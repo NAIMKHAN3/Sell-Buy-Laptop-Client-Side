@@ -15,7 +15,7 @@ const AddProduct = () => {
 
     const handleAddProduct = (data) => {
 
-        const { brand, location, use, resale, original, model } = data;
+        const { brand, location, use, resale, original, model, condition, number, description } = data;
         const image = data.image[0];
         const formData = new FormData();
         formData.append('image', image)
@@ -26,7 +26,7 @@ const AddProduct = () => {
         })
             .then(res => res.json())
             .then(data => {
-                const image = data.data?.url;
+                const imageLink = data.data?.url;
                 const sellername = user.displayName;
                 const selleremail = user.email;
                 const date = new Date().toLocaleDateString("de-DE");
@@ -38,9 +38,12 @@ const AddProduct = () => {
                     resale,
                     original,
                     use,
-                    image,
+                    description,
+                    condition,
+                    image: imageLink,
                     sellername,
                     selleremail,
+                    number,
                     date,
                     status: 'true'
                 }
@@ -66,7 +69,7 @@ const AddProduct = () => {
         <div className=' my-30  shadow-lg  p-10'>
             <h1 className='text-center mt-10 text-4xl font-bold text-orange-400'>Add Product</h1>
             <form onSubmit={handleSubmit(handleAddProduct)}>
-                <div className='flex mt-10'>
+                <div className='grid grid-cols-2 lg:grid-cols-3 gap-3 mt-10'>
                     <div className="form-control w-full mr-3">
                         <label className="label">
                             <span className="label-text">Brand Name</span>
@@ -107,8 +110,6 @@ const AddProduct = () => {
                         </select>
                         {errors.location && <span className='text-red-500'>This field is required</span>}
                     </div>
-                </div>
-                <div className='flex mt-5'>
                     <div className="form-control w-full mr-3">
                         <label className="label">
                             <span className="label-text">Resale Price</span>
@@ -123,6 +124,18 @@ const AddProduct = () => {
                         <input {...register("original", { required: true })} type="number" className="input input-bordered w-full " />
                         {errors.original && <span className='text-red-500'>This field is required</span>}
                     </div>
+                    <div className="form-control w-full">
+                        <label className="label">
+                            <span className="label-text">Condition</span>
+                        </label>
+                        <select {...register("condition")} className="select select-bordered w-full">
+                            <option defaultValue>Excellent</option>
+                            <option>Good</option>
+                            <option>Fair</option>
+
+                        </select>
+                        {errors.location && <span className='text-red-500'>This field is required</span>}
+                    </div>
                     <div className="form-control w-full mr-3">
                         <label className="label">
                             <span className="label-text">Use Time</span>
@@ -130,9 +143,34 @@ const AddProduct = () => {
                         <input {...register("use", { required: true })} type="text" className="input input-bordered w-full " />
                         {errors.use && <span className='text-red-500'>This field is required</span>}
                     </div>
-                </div>
-                <div className='flex mt-5-3'>
-
+                    <div className="form-control w-full mr-3">
+                        <label className="label">
+                            <span className="label-text">Description</span>
+                        </label>
+                        <input {...register("description", { required: true })} type="text" className="input input-bordered w-full " />
+                        {errors.description && <span className='text-red-500'>This field is required</span>}
+                    </div>
+                    <div className="form-control w-full mr-3">
+                        <label className="label">
+                            <span className="label-text">Seller Name</span>
+                        </label>
+                        <input {...register("sellername")} type="text" defaultValue={user?.displayName} readOnly className="input input-bordered w-full " />
+                        {errors.sellername && <span className='text-red-500'>This field is required</span>}
+                    </div>
+                    <div className="form-control w-full mr-3">
+                        <label className="label">
+                            <span className="label-text">Seller Email</span>
+                        </label>
+                        <input {...register("selleremail")} type="text" defaultValue={user?.email} readOnly className="input input-bordered w-full " />
+                        {errors.selleremail && <span className='text-red-500'>This field is required</span>}
+                    </div>
+                    <div className="form-control w-full mr-3">
+                        <label className="label">
+                            <span className="label-text">Phone Number</span>
+                        </label>
+                        <input {...register("number", { required: true })} type="number" className="input input-bordered w-full " />
+                        {errors.number && <span className='text-red-500'>This field is required</span>}
+                    </div>
                     <div className="form-control w-full mr-3">
                         <label className="label">
                             <span className="label-text">Image</span>
@@ -140,20 +178,13 @@ const AddProduct = () => {
                         <input {...register("image", { required: true })} type="file" className="input input-bordered  file-input-ghost w-full " />
                         {errors.password && <span className='text-red-500'>This field is required</span>}
                     </div>
-                    <div className="form-control w-full mr-3">
-                        <label className="label">
-                            <span className="label-text">Seller Name</span>
-                        </label>
-                        <input {...register("sellername")} type="text" defaultValue={user.displayName} readOnly className="input input-bordered w-full " />
-                        {errors.sellername && <span className='text-red-500'>This field is required</span>}
-                    </div>
-                    <div className="form-control w-full mr-3">
-                        <label className="label">
-                            <span className="label-text">Seller Email</span>
-                        </label>
-                        <input {...register("selleremail")} type="text" defaultValue={user.email} readOnly className="input input-bordered w-full " />
-                        {errors.selleremail && <span className='text-red-500'>This field is required</span>}
-                    </div>
+
+
+                </div>
+                <div className='mt-5-3'>
+
+
+
                 </div>
 
 

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { FaCheck } from 'react-icons/fa';
+import { FaCheck, FaHeart } from 'react-icons/fa';
 
 const CetegoryItemCard = ({ product }) => {
     const { image, model, location, resale, original, date, sellername, selleremail, use, status } = product;
@@ -41,15 +41,17 @@ const CetegoryItemCard = ({ product }) => {
                             <p className='mt-2 font-bold'>Original Price: {original}</p>
                             <p className='mt-2 font-bold'>Date: {date}</p>
                             {
-                                verify === 'false' && <p className='font-bold'> Veriry: <span className='text-red-500'>Unverified</span></p>
+                                verify === 'false' && <p className='font-bold'>Seller Veriry: <span className='text-red-500'>Unverified</span></p>
                             }
                             {
-                                verify === 'true' && <p className='font-bold'> Veriry: <span className='text-green-500'>Verified <FaCheck className='inline'></FaCheck></span></p>
+                                verify === 'true' && <p className='font-bold'>Seller Veriry: <span className='text-green-500'>Verified <FaCheck className='inline'></FaCheck></span></p>
                             }
                         </div>
                     </div>
-                    <div className='mt-4 mx-auto w-2/3'>
-                        <button className="btn btn-sm btn-primary w-full">Booking Now</button>
+                    <div className='mt-4 grid grid-cols-1 lg:grid-cols-3 gap-3 px-0'>
+                        <button className="btn btn-sm btn-primary inline text-ali"> <FaHeart className='inline text-pink-600 text-1xl'></FaHeart> Add To WishList</button>
+                        <button className="btn btn-sm btn-primary">Booking Now</button>
+                        <button className="btn btn-sm bg-red-600 ">Report To Admin</button>
                     </div>
                 </div>
             </div>

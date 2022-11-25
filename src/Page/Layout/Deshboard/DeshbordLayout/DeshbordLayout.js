@@ -9,6 +9,7 @@ const DeshbordLayout = () => {
             <div className="drawer drawer-mobile">
                 <input id="deshbord-drawer" type="checkbox" className="drawer-toggle" />
                 <div style={{}} className="drawer-content flex flex-col items-center justify-center">
+                    <div className='mb-20'></div>
                     <Outlet></Outlet>
                 </div>
                 <div className="drawer-side">
@@ -17,8 +18,12 @@ const DeshbordLayout = () => {
                         <li><Link to='/deshboard/addproduct'>Add Product</Link></li>
                         <li><Link to='/deshboard/allbuyer'>All Buyer</Link></li>
                         <li><Link to='/deshboard/allseller'>All Seller</Link></li>
+                        <li><Link to='/deshboard/allseller'>All User</Link></li>
                         <li><Link to='/deshboard/myproduct'>My Product</Link></li>
                         <li><Link to='/deshboard/mybooking'>My Booking</Link></li>
+                        <li><Link to='/deshboard/mybooking'>My WishList</Link></li>
+                        <li><Link to='/deshboard/mybooking'>My Buyer</Link></li>
+                        <li><Link to='/deshboard/mybooking'>Reports Item</Link></li>
                     </ul>
 
                 </div>

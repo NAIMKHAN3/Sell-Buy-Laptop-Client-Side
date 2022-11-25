@@ -7,6 +7,7 @@ import Deshboard from "../Layout/Deshboard/Deshboard"
 import AddProduct from "../Layout/Deshboard/AddProduct/AddProduct";
 import CetegoryItem from "../CetegoryItem/CetegoryItem";
 import AllBuyer from "../Layout/Deshboard/AllBuyer/AllBuyer";
+import AllSeller from "../Layout/Deshboard/AllSeller/AllSeller";
 
 export const router = createBrowserRouter([
     {
@@ -37,6 +38,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/deshboard/allbuyer', element: <AllBuyer></AllBuyer>
+            },
+            {
+                path: '/deshboard/allseller', element: <AllSeller></AllSeller>
             },
         ]
     }
