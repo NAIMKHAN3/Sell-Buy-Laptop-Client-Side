@@ -8,8 +8,7 @@ const DeshbordLayout = () => {
             <Navbar></Navbar>
             <div className="drawer drawer-mobile">
                 <input id="deshbord-drawer" type="checkbox" className="drawer-toggle" />
-                <div style={{}} className="drawer-content flex flex-col items-center justify-center">
-                    <div className='mb-20'></div>
+                <div style={{}} className="drawer-content -10 p-5">
                     <Outlet></Outlet>
                 </div>
                 <div className="drawer-side">
@@ -23,7 +22,7 @@ const DeshbordLayout = () => {
                         <li><Link to='/deshboard/mybooking'>My Booking</Link></li>
                         <li><Link to='/deshboard/mywishlist'>My WishList</Link></li>
                         <li><Link to='/deshboard/mybooking'>My Buyer</Link></li>
-                        <li><Link to='/deshboard/mybooking'>Reports Item</Link></li>
+                        <li><Link to='/deshboard/reportitems'>Reports Item</Link></li>
                     </ul>
 
                 </div>

@@ -24,7 +24,7 @@ const MyWishListCard = ({ wishList }) => {
             })
     }, [productId])
     return (
-        <div className='bg-base-200'>
+        <div className='bg-base-200 lg:w-2/3 mx-auto'>
             {
                 productStatus === 'true' && <p className='pl-3 pt-3 text-green-600 font-bold'>Available</p>
             }

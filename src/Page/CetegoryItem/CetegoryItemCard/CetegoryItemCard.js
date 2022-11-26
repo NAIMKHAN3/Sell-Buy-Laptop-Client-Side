@@ -8,7 +8,7 @@ import { AuthContex } from '../../Share/UserContex/UserContext';
 const CetegoryItemCard = ({ product, setInputModal }) => {
     const { user } = useContext(AuthContex);
 
-    const { image, model, location, resale, original, date, sellername, selleremail, use, status, _id } = product;
+    const { image, brand, model, location, resale, original, date, sellername, selleremail, use, status, _id } = product;
 
     const [verify, setVerify] = useState('')
     useEffect(() => {
@@ -24,7 +24,7 @@ const CetegoryItemCard = ({ product, setInputModal }) => {
 
         if (procced) {
             const WishList = {
-                image, model, location, resale, original, selleremail, sellername, date, use, status, wishlistUser: user.email, productId: _id,
+                image, model, brand, location, resale, original, selleremail, sellername, date, use, status, wishlistUser: user.email, productId: _id,
             }
             fetch('http://localhost:5000/addwishlist', {
                 method: 'POST',
@@ -51,7 +51,7 @@ const CetegoryItemCard = ({ product, setInputModal }) => {
 
         if (procced) {
             const reportItem = {
-                image, model, location, resale, original, selleremail, sellername, date, use, status, reporteduser: user.email, productId: _id,
+                image, brand, model, location, resale, original, selleremail, sellername, date, use, status, reporteduser: user.email, productId: _id,
             }
             fetch('http://localhost:5000/addreportproduct', {
                 method: 'POST',
