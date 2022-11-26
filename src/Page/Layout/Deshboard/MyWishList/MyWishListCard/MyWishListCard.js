@@ -47,10 +47,10 @@ const MyWishListCard = ({ wishList }) => {
                             <p className='mt-2 font-bold'>Original Price: {original}</p>
                             <p className='mt-2 font-bold'>Date: {date}</p>
                             {
-                                verify === 'false' && <p className='font-bold'>Seller Veriry: <span className='text-red-500'>Unverified</span></p>
+                                verify === 'false' && <p className='font-bold'>Seller Verify: <span className='text-red-500'>Unverified</span></p>
                             }
                             {
-                                verify === 'true' && <p className='font-bold'>Seller Veriry: <span className='text-green-500'>Verified <FaCheck className='inline'></FaCheck></span></p>
+                                verify === 'true' && <p className='font-bold'>Seller Verify: <span className='text-green-500'>Verified <FaCheck className='inline'></FaCheck></span></p>
                             }
                         </div>
                     </div>

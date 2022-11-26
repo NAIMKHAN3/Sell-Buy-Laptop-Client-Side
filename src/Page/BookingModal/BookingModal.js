@@ -5,7 +5,7 @@ import { AuthContex } from '../Share/UserContex/UserContext';
 
 const BookingModal = () => {
     const { user, inputModal, setInputModal } = useContext(AuthContex)
-    const { model, resale, brand } = inputModal;
+    const { model, resale, brand, _id, image, selleremail } = inputModal;
     const handleModal = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -14,11 +14,29 @@ const BookingModal = () => {
         const username = user.displayName;
         const useremail = user.email;
         const booking = {
-            username, useremail, brand, model, price: resale, number, meetingLocation,
+            username, useremail, brand, model, image, selleremail, price: resale, number, meetingLocation, productId: _id,
         }
-        console.log(booking)
-        setInputModal(null)
-        toast.success('Product Successfully Booked')
+        fetch('http://localhost:5000/addmybooking', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application'
+            },
+            body: JSON.stringify(booking)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    setInputModal(null)
+                    toast.success('Product Successfully Booked')
+                }
+                else {
+                    toast.error(data.message)
+                }
+                setInputModal(null)
+            })
+            .catch(e => console.log(e))
+
+
     }
     return (
         <div>
