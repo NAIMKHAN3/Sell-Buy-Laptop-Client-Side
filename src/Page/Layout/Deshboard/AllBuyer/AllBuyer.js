@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
+import { FaCheck } from 'react-icons/fa';
 
 const AllBuyer = () => {
 
 
-    const { data: allbuyers = [] } = useQuery({
+    const { data: allbuyers = [], refetch } = useQuery({
         queryKey: ['allbuyer'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/allbuyer')
@@ -12,7 +14,37 @@ const AllBuyer = () => {
             return data
         }
     })
-    console.log(allbuyers)
+
+    const handleVarify = id => {
+        fetch(`http://localhost:5000/verifyuser?id=${id}`, {
+            method: 'PUT'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    refetch()
+                    toast.success('User Verified Success')
+                }
+            })
+            .catch(e => console.log(e))
+    }
+
+    const hanldleDeleteUser = (id) => {
+        const procced = window.confirm('Are You Sure Deleted User?')
+        if (procced) {
+            fetch(`http://localhost:5000/deleteuser?id=${id}`, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.acknowledged) {
+                        refetch()
+                        toast.success('User Deleted Success')
+                    }
+                })
+                .catch(e => console.log(e))
+        }
+    }
 
 
     return (
@@ -27,6 +59,7 @@ const AllBuyer = () => {
                         <th>Role</th>
                         <th>Action</th>
                         <th>Delete</th>
+                        <th>Verify Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,7 +70,15 @@ const AllBuyer = () => {
                             <td>{allbuyer.email}</td>
                             <td>{allbuyer.role}</td>
                             <td><button className='btn btn-primary btn-sm'>Make Admin</button></td>
-                            <td><button className='btn btn-primary btn-sm'>Delete</button></td>
+                            <td><button onClick={() => hanldleDeleteUser(allbuyer._id)} className='btn btn-primary btn-sm'>Delete</button></td>
+                            <td>
+                                {
+                                    allbuyer.verified === "false" && <button onClick={() => handleVarify(allbuyer._id)} className='btn btn-primary btn-sm'>verify User</button>
+                                }
+                                {
+                                    allbuyer.verified === "true" && <span className='text-green-500'>Verified <FaCheck className='inline'></FaCheck></span>
+                                }
+                            </td>
 
                         </tr>)
                     }

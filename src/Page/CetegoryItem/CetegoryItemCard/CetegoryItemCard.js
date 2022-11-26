@@ -48,7 +48,6 @@ const CetegoryItemCard = ({ product }) => {
 
     const handleReport = () => {
         const procced = window.confirm('Are You Sure This Product Report To Admin?')
-
         if (procced) {
             const reportItem = {
                 image, brand, model, location, resale, original, selleremail, sellername, date, use, status, reporteduser: user.email, productId: _id,
@@ -107,13 +106,16 @@ const CetegoryItemCard = ({ product }) => {
                             {
                                 verify === 'true' && <p className='font-bold'>Seller Veriry: <span className='text-green-500'>Verified <FaCheck className='inline'></FaCheck></span></p>
                             }
+                            {
+                                !verify && <p className='font-bold'>Seller Veriry: <span className='text-red-500'>Admin deleted</span></p>
+                            }
                         </div>
                     </div>
                     <div className='mt-4 grid grid-cols-1 lg:grid-cols-3 gap-3 px-0'>
                         <button onClick={handleWishList} className="btn btn-sm btn-primary inline text-ali"> <FaHeart className='inline text-pink-600 text-1xl'></FaHeart> Add To WishList</button>
                         {/* <button onClick={() => setInputModal(product)} htmlFor="sell-laptop-3" className="btn btn-sm btn-primary">Booking Now</button> */}
                         <label onClick={() => setInputModal(product)} htmlFor="sell-laptop-3" className="btn btn-sm btn-primary">Booking Now</label>
-                        <button onClick={handleReport} className="btn btn-sm bg-red-600 ">Report To Admin</button>
+                        <button onClick={() => handleReport('report')} className="btn btn-sm bg-red-600 ">Report To Admin</button>
                     </div>
 
                 </div>

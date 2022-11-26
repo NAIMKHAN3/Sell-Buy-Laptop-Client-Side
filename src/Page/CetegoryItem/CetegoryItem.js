@@ -8,6 +8,10 @@ const CetegoryItem = () => {
     const products = useLoaderData();
     const { inputModal, } = useContext(AuthContex);
 
+    if (!products) {
+        return <h1 className='text-orange-400 text-4xl font-bold text-center my-5'>Product Not Available</h1>
+    }
+
 
 
     return (
