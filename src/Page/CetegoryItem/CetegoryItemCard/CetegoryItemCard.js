@@ -5,8 +5,8 @@ import { FaCheck, FaHeart } from 'react-icons/fa';
 
 import { AuthContex } from '../../Share/UserContex/UserContext';
 
-const CetegoryItemCard = ({ product, setInputModal }) => {
-    const { user } = useContext(AuthContex);
+const CetegoryItemCard = ({ product }) => {
+    const { user, setInputModal } = useContext(AuthContex);
 
     const { image, brand, model, location, resale, original, date, sellername, selleremail, use, status, _id } = product;
 
@@ -112,7 +112,7 @@ const CetegoryItemCard = ({ product, setInputModal }) => {
                     <div className='mt-4 grid grid-cols-1 lg:grid-cols-3 gap-3 px-0'>
                         <button onClick={handleWishList} className="btn btn-sm btn-primary inline text-ali"> <FaHeart className='inline text-pink-600 text-1xl'></FaHeart> Add To WishList</button>
                         {/* <button onClick={() => setInputModal(product)} htmlFor="sell-laptop-3" className="btn btn-sm btn-primary">Booking Now</button> */}
-                        <label onClick={() => setInputModal(product)} htmlFor="sell-laptop-3" className="btn btn-sm btn-primary">open modal</label>
+                        <label onClick={() => setInputModal(product)} htmlFor="sell-laptop-3" className="btn btn-sm btn-primary">Booking Now</label>
                         <button onClick={handleReport} className="btn btn-sm bg-red-600 ">Report To Admin</button>
                     </div>
 

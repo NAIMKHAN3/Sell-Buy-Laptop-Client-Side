@@ -12,6 +12,7 @@ const provider = new GoogleAuthProvider();
 const UserContext = ({ children }) => {
     const [user, setUser] = useState({})
     const [cetegorys, setCetegorys] = useState([]);
+    const [inputModal, setInputModal] = useState(null);
 
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)
@@ -50,7 +51,7 @@ const UserContext = ({ children }) => {
 
 
     return (
-        <AuthContex.Provider value={{ user, cetegorys, createUser, updateUser, logIn, logOut, signInGoogle }}>
+        <AuthContex.Provider value={{ inputModal, setInputModal, user, cetegorys, createUser, updateUser, logIn, logOut, signInGoogle }}>
             {children}
         </AuthContex.Provider>
     );

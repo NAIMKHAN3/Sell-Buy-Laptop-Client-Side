@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { AuthContex } from '../Share/UserContex/UserContext';
 
-const BookingModal = ({ inputModal, setInputModal }) => {
-    const { user } = useContext(AuthContex)
+const BookingModal = () => {
+    const { user, inputModal, setInputModal } = useContext(AuthContex)
     const { model, resale, brand } = inputModal;
     const handleModal = (e) => {
         e.preventDefault();
