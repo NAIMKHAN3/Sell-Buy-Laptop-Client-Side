@@ -11,6 +11,7 @@ import AllSeller from "../Layout/Deshboard/AllSeller/AllSeller";
 import AllUser from "../Layout/Deshboard/AllUser/AllUser";
 import MyWishList from "../Layout/Deshboard/MyWishList/MyWishList";
 import ReportsItem from "../Layout/Deshboard/ReportsItem/ReportsItem";
+import MyProduct from "../Layout/Deshboard/MyProduct/MyProduct";
 
 export const router = createBrowserRouter([
     {
@@ -53,6 +54,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/deshboard/reportitems', element: <ReportsItem></ReportsItem>
+            },
+            {
+                path: '/deshboard/myproduct', element: <MyProduct></MyProduct>
             },
         ]
     }
