@@ -2,10 +2,12 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaCheck, FaHeart } from 'react-icons/fa';
+
 import { AuthContex } from '../../Share/UserContex/UserContext';
 
-const CetegoryItemCard = ({ product }) => {
+const CetegoryItemCard = ({ product, setInputModal }) => {
     const { user } = useContext(AuthContex);
+
     const { image, model, location, resale, original, date, sellername, selleremail, use, status, _id } = product;
 
     const [verify, setVerify] = useState('')
@@ -39,12 +41,37 @@ const CetegoryItemCard = ({ product }) => {
                     else {
                         toast.error(data.message)
                     }
-
-
                 })
                 .catch(e => console.log(e));
-
         }
+    }
+
+    const handleReport = () => {
+        const procced = window.confirm('Are You Sure This Product Report To Admin?')
+
+        if (procced) {
+            const reportItem = {
+                image, model, location, resale, original, selleremail, sellername, date, use, status, reporteduser: user.email, productId: _id,
+            }
+            fetch('http://localhost:5000/addreportproduct', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(reportItem)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.acknowledged) {
+                        toast.success('Reported Product Success To Admin');
+                    }
+                    else {
+                        toast.error(data.message)
+                    }
+                })
+                .catch(e => console.log(e));
+        }
+
     }
 
     // if (!verify) {
@@ -84,9 +111,11 @@ const CetegoryItemCard = ({ product }) => {
                     </div>
                     <div className='mt-4 grid grid-cols-1 lg:grid-cols-3 gap-3 px-0'>
                         <button onClick={handleWishList} className="btn btn-sm btn-primary inline text-ali"> <FaHeart className='inline text-pink-600 text-1xl'></FaHeart> Add To WishList</button>
-                        <button className="btn btn-sm btn-primary">Booking Now</button>
-                        <button className="btn btn-sm bg-red-600 ">Report To Admin</button>
+                        {/* <button onClick={() => setInputModal(product)} htmlFor="sell-laptop-3" className="btn btn-sm btn-primary">Booking Now</button> */}
+                        <label onClick={() => setInputModal(product)} htmlFor="sell-laptop-3" className="btn btn-sm btn-primary">open modal</label>
+                        <button onClick={handleReport} className="btn btn-sm bg-red-600 ">Report To Admin</button>
                     </div>
+
                 </div>
             </div>
         </div>
