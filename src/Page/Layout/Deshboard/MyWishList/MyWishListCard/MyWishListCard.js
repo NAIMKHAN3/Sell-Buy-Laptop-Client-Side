@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { FaCheck } from 'react-icons/fa';
 
 const MyWishListCard = ({ wishList }) => {
-    const { image, model, location, resale, original, date, productId, sellername, selleremail, use, status, _id } = wishList;
+    const { image, model, location, resale, original, date, productId, sellername, selleremail, use, _id } = wishList;
     const [verify, setVerify] = useState('')
     const [productStatus, setProductStatus] = useState('')
 
@@ -57,6 +57,7 @@ const MyWishListCard = ({ wishList }) => {
                     <div className='mt-4 grid grid-cols-1 lg:grid-cols-3 gap-3 px-0'>
                         <button className="btn btn-sm btn-primary">Booking Now</button>
                         <button className="btn btn-sm bg-red-600 ">Report To Admin</button>
+                        <button className="btn btn-sm bg-green-600 ">Pay product</button>
                     </div>
                 </div>
             </div>

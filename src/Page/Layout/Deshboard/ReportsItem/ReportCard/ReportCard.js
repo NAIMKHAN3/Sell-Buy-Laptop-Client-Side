@@ -4,18 +4,22 @@ import toast from 'react-hot-toast';
 const ReportCard = ({ reportItem, refetch }) => {
     const { image, brand, model, reporteduser, selleremail, _id, productId } = reportItem;
     const handleDelete = () => {
-        fetch(`http://localhost:5000/deletereport?id=${_id}&email=${reporteduser}&productid=${productId}`, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.acknowledged) {
-                    refetch();
-                    toast.success('Report Item Deleted Success')
-                }
-
+        const procced = window.confirm('Are you sure deleted product?')
+        if (procced) {
+            fetch(`http://localhost:5000/deletereport?id=${_id}&email=${reporteduser}&productId=${productId}`, {
+                method: 'DELETE'
             })
-            .catch(e => console.log(e))
+                .then(res => res.json())
+                .then(data => {
+                    if (data.acknowledged) {
+                        refetch();
+                        toast.success('Report Item Deleted Success')
+                    }
+
+                })
+                .catch(e => console.log(e))
+        }
+
     }
     return (
         <div className="card border border-orange-300 p-3">

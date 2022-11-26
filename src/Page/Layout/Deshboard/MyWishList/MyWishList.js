@@ -17,7 +17,7 @@ const MyWishList = () => {
             return data
         }
     })
-    console.log(wishLists)
+
 
     if (isLoading || !user || !user?.uid) {
         return <h1>Loaddin .....</h1>

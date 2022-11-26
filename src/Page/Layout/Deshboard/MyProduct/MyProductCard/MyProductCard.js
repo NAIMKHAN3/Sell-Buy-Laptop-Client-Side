@@ -30,7 +30,6 @@ const MyProductCard = ({ product, setRefetch, refetch }) => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
                     if (data.acknowledged) {
                         toast.success('Added Advertice Success')
                     }

@@ -16,10 +16,11 @@ const BookingModal = () => {
         const booking = {
             username, useremail, brand, model, image, selleremail, price: resale, number, meetingLocation, productId: _id,
         }
+
         fetch('http://localhost:5000/addmybooking', {
             method: 'POST',
             headers: {
-                'content-type': 'application'
+                'content-type': 'application/json'
             },
             body: JSON.stringify(booking)
         })

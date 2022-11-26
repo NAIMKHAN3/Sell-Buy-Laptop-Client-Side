@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import BookingModal from '../BookingModal/BookingModal';
 import { AuthContex } from '../Share/UserContex/UserContext';
@@ -8,7 +8,7 @@ const CetegoryItem = () => {
     const products = useLoaderData();
     const { inputModal, } = useContext(AuthContex);
 
-    if (!products) {
+    if (!products.length) {
         return <h1 className='text-orange-400 text-4xl font-bold text-center my-5'>Product Not Available</h1>
     }
 

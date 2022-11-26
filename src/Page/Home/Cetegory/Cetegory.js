@@ -5,7 +5,8 @@ import CetegoryCard from '../CetegoryCard/CetegoryCard';
 const Cetegory = () => {
     const { cetegorys } = useContext(AuthContex);
 
-    if (!cetegorys) {
+    if (!cetegorys.length) {
+
         return
     }
 
