@@ -9,7 +9,7 @@ const AllBuyer = () => {
     const { data: allbuyers = [], refetch } = useQuery({
         queryKey: ['allbuyer'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/allbuyer')
+            const res = await fetch('http://localhost:5000/allbuyer', { headers: { authorization: `Bearer ${localStorage.getItem('token')}` } })
             const data = await res.json()
             return data
         }
@@ -17,7 +17,10 @@ const AllBuyer = () => {
 
     const handleVarify = id => {
         fetch(`http://localhost:5000/verifyuser?id=${id}`, {
-            method: 'PUT'
+            method: 'PUT',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('token')}`
+            }
         })
             .then(res => res.json())
             .then(data => {
@@ -33,7 +36,10 @@ const AllBuyer = () => {
         const procced = window.confirm('Are You Sure Deleted User?')
         if (procced) {
             fetch(`http://localhost:5000/deleteuser?id=${id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {
@@ -44,6 +50,10 @@ const AllBuyer = () => {
                 })
                 .catch(e => console.log(e))
         }
+    }
+
+    if (!allbuyers.length) {
+        return <h1 className='my-5 text-center font-bold text-4xl text-orange-400'>Buyer is Empty</h1>
     }
 
 
@@ -64,7 +74,7 @@ const AllBuyer = () => {
                 </thead>
                 <tbody>
                     {
-                        allbuyers.map((allbuyer, i) => <tr key={allbuyer._id}>
+                        allbuyers?.map((allbuyer, i) => <tr key={allbuyer._id}>
                             <th>{i + 1}</th>
                             <td>{allbuyer.name}</td>
                             <td>{allbuyer.email}</td>

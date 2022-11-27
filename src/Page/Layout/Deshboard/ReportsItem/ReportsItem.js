@@ -6,7 +6,7 @@ const ReportsItem = () => {
     const { data: allReportItems = [], refetch } = useQuery({
         queryKey: ['allreportitem'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/allreportitem')
+            const res = await fetch('http://localhost:5000/allreportitem', { headers: { authorization: `Bearer ${localStorage.getItem('token')}` } })
             const data = await res.json()
             return data
         }

@@ -14,6 +14,8 @@ const SignUp = () => {
 
         createUser(email, password)
             .then(result => {
+
+                const userEmail = result.user?.email
                 const user = {
                     name,
                     email: result.user?.email,
@@ -32,6 +34,15 @@ const SignUp = () => {
                 })
                     .then(res => res.json())
                     .then(data => {
+                        fetch(`http://localhost:5000/jwt?email=${userEmail}`)
+                            .then(res => res.json())
+                            .then(data => {
+                                const token = data.token;
+                                console.log(token)
+                                localStorage.setItem('token', token)
+                            })
+                            .catch(e => console.log(e))
+                        // navigate(from, { replace: true })
                         toast.success('Sign Up Success')
                     })
                     .catch(e => console.log(e))
@@ -42,6 +53,7 @@ const SignUp = () => {
     const handleGoogle = () => {
         signInGoogle()
             .then(result => {
+                const userEmail = result.user.email;
                 const email = result.user.email;
                 const name = result.user.displayName;
                 const user = {
@@ -59,6 +71,15 @@ const SignUp = () => {
                 })
                     .then(res => res.json())
                     .then(data => {
+                        fetch(`http://localhost:5000/jwt?email=${userEmail}`)
+                            .then(res => res.json())
+                            .then(data => {
+                                const token = data.token;
+                                console.log(token)
+                                localStorage.setItem('token', token)
+                            })
+                            .catch(e => console.log(e))
+                        // navigate(from, { replace: true })
                         toast.success('Sign Up Success')
                     })
                     .catch(e => console.log(e))

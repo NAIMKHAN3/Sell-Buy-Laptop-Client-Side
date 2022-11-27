@@ -20,7 +20,10 @@ const MyBookingCard = ({ myBooking, refetch }) => {
         const procced = window.confirm('Are you sure Cancel booking?')
         if (procced) {
             fetch(`http://localhost:5000/deletebooking?id=${_id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {
@@ -43,6 +46,9 @@ const MyBookingCard = ({ myBooking, refetch }) => {
             }
             {
                 productStatus === 'false' && <p className='pl-3 pt-3 text-red-600 font-bold'>Sold Out</p>
+            }
+            {
+                !productStatus && <p className='pl-3 pt-3 text-red-600 font-bold'>Sold Out</p>
             }
             <div>
                 <figure><img src={image} alt="Shoes" className='lg:h-48 lg:w-full' /></figure>

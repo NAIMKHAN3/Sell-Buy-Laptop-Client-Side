@@ -7,7 +7,7 @@ const AllUser = () => {
     const { data: allUsers = [], refetch } = useQuery({
         queryKey: ['alluser'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/alluser')
+            const res = await fetch('http://localhost:5000/alluser', { headers: { authorization: `Bearer ${localStorage.getItem('token')}` } })
             const data = await res.json()
             return data
         }
@@ -15,7 +15,10 @@ const AllUser = () => {
 
     const handleVarify = id => {
         fetch(`http://localhost:5000/verifyuser?id=${id}`, {
-            method: 'PUT'
+            method: 'PUT',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('token')}`
+            }
         })
             .then(res => res.json())
             .then(data => {
@@ -32,7 +35,10 @@ const AllUser = () => {
         const procced = window.confirm('Are You Sure Promotion User by Admin?')
         if (procced) {
             fetch(`http://localhost:5000/makeadmin?id=${id}`, {
-                method: 'PUT'
+                method: 'PUT',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {
@@ -48,7 +54,10 @@ const AllUser = () => {
         const procced = window.confirm('Are You Sure Deleted User?')
         if (procced) {
             fetch(`http://localhost:5000/deleteuser?id=${id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {
@@ -61,6 +70,10 @@ const AllUser = () => {
                 .catch(e => console.log(e))
         }
 
+    }
+
+    if (!allUsers.length) {
+        return <h1 className='my-5 text-center font-bold text-4xl text-orange-400'>User is Empty</h1>
     }
 
 

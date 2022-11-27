@@ -11,13 +11,26 @@ const Login = () => {
     const handleSignUp = data => {
         const { email, password } = data;
         logIn(email, password)
-            .then(result => { toast.success('Log In Success') })
+            .then(result => {
+                fetch(`http://localhost:5000/jwt?email=${result.user.email}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        const token = data.token;
+                        console.log(token)
+                        localStorage.setItem('token', token)
+                    })
+                    .catch(e => console.log(e))
+                // navigate(from, { replace: true })
+                toast.success('Log In Success')
+            })
             .catch(e => console.log(e))
     }
 
     const handleGoogle = () => {
         signInGoogle()
             .then(result => {
+                console.log(result)
+                const userEmail = result.user.email;
                 const email = result.user.email;
                 const name = result.user.displayName;
                 const user = {
@@ -37,6 +50,15 @@ const Login = () => {
                 })
                     .then(res => res.json())
                     .then(data => {
+                        fetch(`http://localhost:5000/jwt?email=${userEmail}`)
+                            .then(res => res.json())
+                            .then(data => {
+                                const token = data.token;
+                                console.log(token)
+                                localStorage.setItem('token', token)
+                            })
+                            .catch(e => console.log(e))
+                        // navigate(from, { replace: true })
                         toast.success('Log In Success')
                     })
                     .catch(e => console.log(e))

@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
             {
                 path: '/cetegoryitem/:id',
 
-                loader: ({ params }) => fetch(`http://localhost:5000/cetegoryitem/${params.id}`), element: <CetegoryItem></CetegoryItem>
+                loader: ({ params }) => fetch(`http://localhost:5000/cetegoryitem/${params.id}`, { headers: { authorization: `Bearer ${localStorage.getItem('token')}` } }), element: <CetegoryItem></CetegoryItem>
             },
             {
                 path: '/login', element: <Login></Login>
@@ -65,7 +65,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/deshboard/payment/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/payment/${params.id}`),
+                loader: ({ params }) => fetch(`http://localhost:5000/payment/${params.id}`, { headers: { authorization: `Bearer ${localStorage.getItem('token')}` } }),
                 element: <Payment></Payment>
             },
         ]

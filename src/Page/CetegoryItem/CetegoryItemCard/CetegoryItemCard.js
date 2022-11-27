@@ -12,7 +12,8 @@ const CetegoryItemCard = ({ product }) => {
 
     const [verify, setVerify] = useState('')
     useEffect(() => {
-        axios.get(`http://localhost:5000/userverified?email=${selleremail}`)
+        axios.get(`http://localhost:5000/userverified?email=${selleremail}`,
+        )
             .then(res => {
                 setVerify(res.data.verified)
 
@@ -24,12 +25,13 @@ const CetegoryItemCard = ({ product }) => {
 
         if (procced) {
             const WishList = {
-                image, model, brand, location, resale, original, selleremail, sellername, date, use, status, wishlistUser: user.email, productId: _id,
+                image, model, brand, location, resale, original, selleremail, sellername, date, use, status, wishlistUser: user.email, username: user.displayName, productId: _id,
             }
             fetch('http://localhost:5000/addwishlist', {
                 method: 'POST',
                 headers: {
-                    'content-type': 'application/json'
+                    'content-type': 'application/json',
+                    authorization: `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify(WishList)
             })
@@ -55,7 +57,8 @@ const CetegoryItemCard = ({ product }) => {
             fetch('http://localhost:5000/addreportproduct', {
                 method: 'POST',
                 headers: {
-                    'content-type': 'application/json'
+                    'content-type': 'application/json',
+                    authorization: `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify(reportItem)
             })

@@ -8,7 +8,7 @@ const AllSeller = () => {
     const { data: allSellers = [], refetch } = useQuery({
         queryKey: ['allseller'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/allseller')
+            const res = await fetch('http://localhost:5000/allseller', { headers: { authorization: `Bearer ${localStorage.getItem('token')}` } })
             const data = await res.json()
             return data
         }
@@ -17,7 +17,10 @@ const AllSeller = () => {
         const procced = window.confirm('Are You Sure Verify User?')
         if (procced) {
             fetch(`http://localhost:5000/verifyuser?id=${id}`, {
-                method: 'PUT'
+                method: 'PUT',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {
@@ -35,7 +38,10 @@ const AllSeller = () => {
         const procced = window.confirm('Are You Sure Promotion User by Admin?')
         if (procced) {
             fetch(`http://localhost:5000/makeadmin?id=${id}`, {
-                method: 'PUT'
+                method: 'PUT',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {
@@ -50,11 +56,18 @@ const AllSeller = () => {
 
     }
 
+    if (!allSellers.length) {
+        return <h1 className='my-5 text-center font-bold text-4xl text-orange-400'>Seller is Empty</h1>
+    }
+
     const hanldleDeleteUser = (id) => {
         const procced = window.confirm('Are You Sure Deleted User?')
         if (procced) {
             fetch(`http://localhost:5000/deleteuser?id=${id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {

@@ -1,11 +1,15 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaCheck } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { AuthContex } from '../../../../Share/UserContex/UserContext';
 
 const MyWishListCard = ({ wishList }) => {
+    const { user, setInputModal } = useContext(AuthContex)
     const { image, model, location, resale, original, date, productId, sellername, selleremail, use, _id } = wishList;
     const [verify, setVerify] = useState('')
     const [productStatus, setProductStatus] = useState('')
+
 
     useEffect(() => {
         axios.get(`http://localhost:5000/userverified?email=${selleremail}`)
@@ -31,6 +35,9 @@ const MyWishListCard = ({ wishList }) => {
             {
                 productStatus === 'false' && <p className='pl-3 pt-3 text-red-600 font-bold'>Sold Out</p>
             }
+            {
+                !productStatus && <p className='pl-3 pt-3 text-red-600 font-bold'>Sold Out</p>
+            }
 
             <div className="hero-content flex-col lg:flex-row  mb-5">
                 <img src={image} alt='' className=" h-48 md:h-full w-48 rounded-lg" />
@@ -55,9 +62,9 @@ const MyWishListCard = ({ wishList }) => {
                         </div>
                     </div>
                     <div className='mt-4 grid grid-cols-1 lg:grid-cols-3 gap-3 px-0'>
-                        <button className="btn btn-sm btn-primary">Booking Now</button>
+                        <label onClick={() => setInputModal(wishList)} htmlFor="sell-laptop-3" className="btn btn-sm btn-primary">Booking Now</label>
                         <button className="btn btn-sm bg-red-600 ">Report To Admin</button>
-                        <button className="btn btn-sm bg-green-600 ">Pay product</button>
+                        {/* <Link to={`/deshboard/payment/${_id}`}>  <button className="btn btn-sm bg-green-600 ">Pay product</button></Link> */}
                     </div>
                 </div>
             </div>

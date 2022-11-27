@@ -8,7 +8,10 @@ const MyProductCard = ({ product, setRefetch, refetch }) => {
         const procced = window.confirm('Are You Sure Product deleted?')
         if (procced) {
             fetch(`http://localhost:5000/deleteproduct?id=${_id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {
@@ -26,7 +29,10 @@ const MyProductCard = ({ product, setRefetch, refetch }) => {
         const procced = window.confirm('Are You Sure This product Added a Advertice?')
         if (procced) {
             fetch(`http://localhost:5000/updateproduct?id=${_id}`, {
-                method: 'PUT'
+                method: 'PUT',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {

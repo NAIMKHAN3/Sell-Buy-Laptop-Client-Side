@@ -7,7 +7,10 @@ const ReportCard = ({ reportItem, refetch }) => {
         const procced = window.confirm('Are you sure deleted product?')
         if (procced) {
             fetch(`http://localhost:5000/deletereport?id=${_id}&email=${reporteduser}&productId=${productId}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
             })
                 .then(res => res.json())
                 .then(data => {

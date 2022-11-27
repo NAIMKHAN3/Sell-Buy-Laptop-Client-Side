@@ -1,5 +1,6 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 
 const CheckOut = ({ data }) => {
@@ -12,13 +13,16 @@ const CheckOut = ({ data }) => {
   const [tranzaction, setTranzaction] = useState('')
   const stripe = useStripe();
   const elements = useElements();
-  const { price, username, useremail, _id } = data
+  const { price, username, useremail, _id, productId } = data
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     fetch("http://localhost:5000/create-payment-intent", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem('token')}`
+      },
       body: JSON.stringify({ price }),
     })
       .then((res) => res.json())
@@ -68,16 +72,28 @@ const CheckOut = ({ data }) => {
         bookingId: _id,
         transactionId: paymentIntent.id,
         useremail,
+        productId,
       }
       fetch('http://localhost:5000/payment', {
         method: 'POST',
         headers: {
-          'content-type': 'application/json'
+          'content-type': 'application/json',
+          authorization: `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify(payment)
       })
         .then(res => res.json())
         .then(data => {
+          console.log(data)
+          if (data.acknowledged) {
+            fetch(`http://localhost:5000/paymentproductdelete?productId=${productId}&bookingId=${_id}`, {
+              method: 'DELETE',
+
+            })
+              .then(res => res.json())
+              .then(data => console.log(data))
+          }
+          toast.success('Payment Success')
           console.log(data)
           setSucceeded('congrats! your paymant is succeeded')
           setTranzaction(paymentIntent.id)
