@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 const MyBookingCard = ({ myBooking, refetch }) => {
     const { image, brand, model, selleremail, price, productId, _id } = myBooking;
@@ -51,8 +52,8 @@ const MyBookingCard = ({ myBooking, refetch }) => {
 
                     <p>S.U Email: <span className='font-bold'>{selleremail}</span></p>
                     <div className="card-actions">
-                        <button onClick={handleBooking} className="btn bg-red-500 w-full mt-3">Booking Cancel</button>
-                        <button className="btn bg-green-500 w-full mt-3">Pay Product</button>
+                        <button onClick={handleBooking} className="btn bg-red-500 w-full mt-3 border-none">Booking Cancel</button>
+                        <Link to={`/deshboard/payment/${_id}`} className="w-full"><button className="btn bg-green-500 w-full border-none  mt-3">Pay Product</button></Link>
                     </div>
                 </div>
             </div>

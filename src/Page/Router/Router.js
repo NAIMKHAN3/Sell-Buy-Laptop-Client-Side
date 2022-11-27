@@ -13,6 +13,7 @@ import MyWishList from "../Layout/Deshboard/MyWishList/MyWishList";
 import ReportsItem from "../Layout/Deshboard/ReportsItem/ReportsItem";
 import MyProduct from "../Layout/Deshboard/MyProduct/MyProduct";
 import MyBooking from "../Layout/Deshboard/MyBooking/MyBooking";
+import Payment from "../Layout/Deshboard/Payment/Payment";
 
 export const router = createBrowserRouter([
     {
@@ -61,6 +62,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/deshboard/mybooking', element: <MyBooking></MyBooking>
+            },
+            {
+                path: '/deshboard/payment/:id',
+                loader: ({ params }) => fetch(`http://localhost:5000/payment/${params.id}`),
+                element: <Payment></Payment>
             },
         ]
     }
