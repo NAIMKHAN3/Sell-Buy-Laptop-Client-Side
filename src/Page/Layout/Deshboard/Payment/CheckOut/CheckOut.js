@@ -6,14 +6,13 @@ import toast from 'react-hot-toast';
 const CheckOut = ({ data }) => {
 
 
-
   const [cardError, setCardError] = useState('');
   const [clientSecret, setClientSecret] = useState('')
   const [succeeded, setSucceeded] = useState('')
   const [tranzaction, setTranzaction] = useState('')
   const stripe = useStripe();
   const elements = useElements();
-  const { price, username, useremail, _id, productId } = data
+  const { price, username, useremail, selleremail, _id, productId } = data
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -34,6 +33,8 @@ const CheckOut = ({ data }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const number = event.target.number.value;
+    const location = event.target.location.value;
 
     if (elements == null) {
       return;
@@ -68,11 +69,16 @@ const CheckOut = ({ data }) => {
     }
     if (paymentIntent?.status === "succeeded") {
       const payment = {
-        price,
+
         bookingId: _id,
         transactionId: paymentIntent.id,
-        useremail,
         productId,
+        name: username,
+        email: useremail,
+        price,
+        number,
+        selleremail: selleremail,
+        location,
       }
       fetch('http://localhost:5000/payment', {
         method: 'POST',
@@ -137,13 +143,13 @@ const CheckOut = ({ data }) => {
               <label className="label">
                 <span className="label-text">Phone Number</span>
               </label>
-              <input type="text" className="input input-bordered  w-full" required />
+              <input name='number' type="text" className="input input-bordered  w-full" required />
             </div>
             <div className='lg:w-1/2 m-2'>
               <label className="label">
                 <span className="label-text">Address</span>
               </label>
-              <input type="text" className="input input-bordered  w-full" required />
+              <input name='location' type="text" className="input input-bordered  w-full" required />
             </div>
           </div>
 

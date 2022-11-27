@@ -54,7 +54,6 @@ const Login = () => {
                             .then(res => res.json())
                             .then(data => {
                                 const token = data.token;
-                                console.log(token)
                                 localStorage.setItem('token', token)
                             })
                             .catch(e => console.log(e))
