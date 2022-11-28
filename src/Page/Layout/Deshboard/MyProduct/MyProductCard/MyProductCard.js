@@ -7,7 +7,7 @@ const MyProductCard = ({ product, setRefetch, refetch }) => {
     const handleDelete = () => {
         const procced = window.confirm('Are You Sure Product deleted?')
         if (procced) {
-            fetch(`http://localhost:5000/deleteproduct?id=${_id}`, {
+            fetch(`https://sell-buy-laptop-server-side.vercel.app/deleteproduct?id=${_id}`, {
                 method: 'DELETE',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('token')}`
@@ -28,7 +28,7 @@ const MyProductCard = ({ product, setRefetch, refetch }) => {
     const handleAdvertice = () => {
         const procced = window.confirm('Are You Sure This product Added a Advertice?')
         if (procced) {
-            fetch(`http://localhost:5000/updateproduct?id=${_id}`, {
+            fetch(`https://sell-buy-laptop-server-side.vercel.app/updateproduct?id=${_id}`, {
                 method: 'PUT',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('token')}`

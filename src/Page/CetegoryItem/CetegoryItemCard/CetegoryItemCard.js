@@ -7,18 +7,32 @@ import { AuthContex } from '../../Share/UserContex/UserContext';
 
 const CetegoryItemCard = ({ product }) => {
     const { user, setInputModal } = useContext(AuthContex);
+    const [isLoading, setIsLoading] = useState(true)
+
+
 
     const { image, brand, model, location, resale, original, date, sellername, selleremail, use, status, _id } = product;
 
     const [verify, setVerify] = useState('')
     useEffect(() => {
-        axios.get(`http://localhost:5000/userverified?email=${selleremail}`,
+        axios.get(`https://sell-buy-laptop-server-side.vercel.app/userverified?email=${selleremail}`,
         )
             .then(res => {
+                setIsLoading(false)
                 setVerify(res.data.verified)
 
             })
     }, [selleremail])
+
+    if (isLoading) {
+        return <div className="text-center">
+            <div class="flex justify-center items-center mt-10">
+                <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    }
 
     const handleWishList = () => {
         const procced = window.confirm('Are You Sure Product Add To My WishList')
@@ -27,7 +41,7 @@ const CetegoryItemCard = ({ product }) => {
             const WishList = {
                 image, model, brand, location, resale, original, selleremail, sellername, date, use, status, wishlistUser: user.email, username: user.displayName, productId: _id,
             }
-            fetch('http://localhost:5000/addwishlist', {
+            fetch('https://sell-buy-laptop-server-side.vercel.app/addwishlist', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -39,6 +53,7 @@ const CetegoryItemCard = ({ product }) => {
                 .then(data => {
                     if (data.acknowledged) {
                         toast.success('Product Added A My WishList');
+                        setIsLoading(false)
                     }
                     else {
                         toast.error(data.message)
@@ -54,7 +69,7 @@ const CetegoryItemCard = ({ product }) => {
             const reportItem = {
                 image, brand, model, location, resale, original, selleremail, sellername, date, use, status, reporteduser: user.email, productId: _id,
             }
-            fetch('http://localhost:5000/addreportproduct', {
+            fetch('https://sell-buy-laptop-server-side.vercel.app/addreportproduct', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -66,6 +81,7 @@ const CetegoryItemCard = ({ product }) => {
                 .then(data => {
                     if (data.acknowledged) {
                         toast.success('Reported Product Success To Admin');
+                        setIsLoading(false)
                     }
                     else {
                         toast.error(data.message)

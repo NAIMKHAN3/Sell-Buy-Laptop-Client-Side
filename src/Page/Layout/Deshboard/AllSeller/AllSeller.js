@@ -1,22 +1,25 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaCheck } from 'react-icons/fa';
 
 const AllSeller = () => {
+    const [loading, setLoading] = useState(true)
 
     const { data: allSellers = [], refetch } = useQuery({
         queryKey: ['allseller'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/allseller', { headers: { authorization: `Bearer ${localStorage.getItem('token')}` } })
+            const res = await fetch('https://sell-buy-laptop-server-side.vercel.app/allseller', { headers: { authorization: `Bearer ${localStorage.getItem('token')}` } })
             const data = await res.json()
+            setLoading(false)
             return data
         }
     })
     const handleVarify = id => {
+        setLoading(true)
         const procced = window.confirm('Are You Sure Verify User?')
         if (procced) {
-            fetch(`http://localhost:5000/verifyuser?id=${id}`, {
+            fetch(`https://sell-buy-laptop-server-side.vercel.app/verifyuser?id=${id}`, {
                 method: 'PUT',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('token')}`
@@ -27,6 +30,7 @@ const AllSeller = () => {
                     if (data.acknowledged) {
                         refetch()
                         toast.success('User Verified Success')
+                        setLoading(false)
                     }
                 })
 
@@ -35,9 +39,10 @@ const AllSeller = () => {
 
     }
     const handleMakeAdmin = id => {
+        setLoading(true)
         const procced = window.confirm('Are You Sure Promotion User by Admin?')
         if (procced) {
-            fetch(`http://localhost:5000/makeadmin?id=${id}`, {
+            fetch(`https://sell-buy-laptop-server-side.vercel.app/makeadmin?id=${id}`, {
                 method: 'PUT',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('token')}`
@@ -48,12 +53,22 @@ const AllSeller = () => {
                     if (data.acknowledged) {
                         refetch()
                         toast.success('User Promoted by Admin')
+                        setLoading(false)
                     }
                 })
 
                 .catch(e => console.log(e))
         }
 
+    }
+    if (loading) {
+        return <div className="text-center">
+            <div class="flex justify-center items-center mt-10">
+                <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
     }
 
     if (!allSellers.length) {
@@ -63,7 +78,8 @@ const AllSeller = () => {
     const hanldleDeleteUser = (id) => {
         const procced = window.confirm('Are You Sure Deleted User?')
         if (procced) {
-            fetch(`http://localhost:5000/deleteuser?id=${id}`, {
+            setLoading(true)
+            fetch(`https://sell-buy-laptop-server-side.vercel.app/deleteuser?id=${id}`, {
                 method: 'DELETE',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('token')}`
@@ -74,6 +90,7 @@ const AllSeller = () => {
                     if (data.acknowledged) {
                         refetch()
                         toast.success('User Deleted Success')
+                        setLoading(false)
                     }
                 })
 

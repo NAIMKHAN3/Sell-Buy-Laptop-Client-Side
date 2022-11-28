@@ -12,7 +12,7 @@ const MyWishList = () => {
     const { data: wishLists = [], refetch } = useQuery({
         queryKey: ['userwishlist'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/userwishlist?email=${user.email}`, { headers: { authorization: `Bearer ${localStorage.getItem('token')}` } })
+            const res = await fetch(`https://sell-buy-laptop-server-side.vercel.app/userwishlist?email=${user.email}`, { headers: { authorization: `Bearer ${localStorage.getItem('token')}` } })
             const data = await res.json()
             setLoading(false)
             return data
@@ -21,7 +21,13 @@ const MyWishList = () => {
 
 
     if (isLoading || !user || !user?.uid) {
-        return <h1>Loaddin .....</h1>
+        return <div className="text-center">
+            <div class="flex justify-center items-center mt-10">
+                <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
     }
 
     if (!wishLists.length) {

@@ -13,37 +13,44 @@ const UserContext = ({ children }) => {
     const [user, setUser] = useState({})
     const [cetegorys, setCetegorys] = useState([]);
     const [inputModal, setInputModal] = useState(null);
+    const [loading, setLoading] = useState(true)
 
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     const updateUser = (name) => {
+        setLoading(false)
         return updateProfile(auth.currentUser, { displayName: name })
     }
 
     const logIn = (email, password) => {
+        setLoading(false)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
     const logOut = () => {
+        setLoading(false)
         return signOut(auth)
     }
 
     const signInGoogle = () => {
+        setLoading(false)
         return signInWithPopup(auth, provider)
     }
 
 
     useEffect(() => {
-        onAuthStateChanged(auth, currentUser => {
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser)
+            setLoading(false)
+            return () => unsubscribe();
         })
     }, [])
 
 
     useEffect(() => {
-        axios.get('http://localhost:5000/cetegorys')
+        axios.get('https://sell-buy-laptop-server-side.vercel.app/cetegorys')
             .then(res => {
                 setCetegorys(res.data)
             })
@@ -51,7 +58,7 @@ const UserContext = ({ children }) => {
 
 
     return (
-        <AuthContex.Provider value={{ inputModal, setInputModal, user, cetegorys, createUser, updateUser, logIn, logOut, signInGoogle }}>
+        <AuthContex.Provider value={{ loading, inputModal, setInputModal, user, cetegorys, createUser, updateUser, logIn, logOut, signInGoogle }}>
             {children}
         </AuthContex.Provider>
     );

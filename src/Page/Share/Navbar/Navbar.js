@@ -1,14 +1,21 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
-import laptop from '../Navbar/image/laptop.jpg'
+import laptop from '../Navbar/image/icon.jpg'
 import { AuthContex } from '../UserContex/UserContext';
 
 const Navbar = () => {
-    const { user, cetegorys } = useContext(AuthContex);
+    const { user, cetegorys, logOut } = useContext(AuthContex);
 
     if (!cetegorys) {
         return
+    }
+    const signOut = () => {
+        logOut()
+            .then(result => {
+                toast.success('Log Out Success')
+            })
     }
 
 
@@ -23,10 +30,20 @@ const Navbar = () => {
                 }
             </ul>
         </div>
-        <Link className='mr-5 font-bold text-xl' to='/deshboard'>Deshboard</Link>
-        <button className='mr-5 font-bold text-xl'>Log Out</button>
-        <Link className='mr-5 font-bold text-xl' to='/login'>Log In</Link>
-        <Link className='mr-5 font-bold text-xl' to='/signup'>Sign Up</Link>
+        {
+            user?.uid ? <>
+                <Link className='mr-5 font-bold text-xl' to='/deshboard'>Deshboard</Link>
+                <Link to='/blog' className='mr-5 font-bold text-xl' >Blog</Link>
+                <button onClick={signOut} className='mr-5 font-bold text-xl'>Log Out</button>
+            </> : <>
+                <Link to='/blog' className='mr-5 font-bold text-xl' >Blog</Link>
+                <Link className='mr-5 font-bold text-xl' to='/login'>Log In</Link>
+                <Link className='mr-5 font-bold text-xl' to='/signup'>Sign Up</Link>
+            </>
+        }
+
+
+
 
 
 
@@ -36,7 +53,7 @@ const Navbar = () => {
         <div className='mt-7'>
             <div className='flex justify-center items-center'>
                 <img className='w-16 mr-3' src={laptop} alt="" />
-                <Link to='/'> <p className=" btn-ghost text-4xl font-bold warning-content text-center">Sell-Buy-Laptop</p> </Link>
+                <Link to='/'> <p className=" btn-ghost text-4xl font-bold warning-content text-center mb-4">Sell-Buy-Laptop</p> </Link>
             </div>
             <div className="navbar bg-success px-8">
 

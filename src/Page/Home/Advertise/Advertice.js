@@ -3,6 +3,8 @@ import React, { useContext } from 'react';
 import BookingModal from '../../BookingModal/BookingModal';
 import CetegoryItemCard from '../../CetegoryItem/CetegoryItemCard/CetegoryItemCard';
 import { AuthContex } from '../../Share/UserContex/UserContext';
+import add from './add.json';
+import Lottie from "lottie-react";
 
 
 
@@ -12,7 +14,7 @@ const Advertice = () => {
     const { data: advertice = [] } = useQuery({
         queryKey: ['adverticeproduct'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/adverticeproduct')
+            const res = await fetch('https://sell-buy-laptop-server-side.vercel.app/adverticeproduct')
             const data = await res.json()
             return data
         }
@@ -22,7 +24,10 @@ const Advertice = () => {
     }
     return (
         <section>
-            <h1 className='text-4xl text-orange-400 font-bold text-center my-5'>Advertice Product</h1>
+            <div className='flex justify-center'>
+                <Lottie className='w-[100px] text-center p-4' animationData={add} loop={true} />
+                <h1 className='text-4xl text-orange-400 font-bold text-center my-5'>Advertice Product</h1>
+            </div>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-3 my-5 px-10'>
                 {
                     advertice.map(product => <CetegoryItemCard key={product._id} product={product}></CetegoryItemCard>)

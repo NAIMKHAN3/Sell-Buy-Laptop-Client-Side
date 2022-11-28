@@ -12,7 +12,7 @@ const MyWishListCard = ({ wishList }) => {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/userverified?email=${selleremail}`)
+        axios.get(`https://sell-buy-laptop-server-side.vercel.app/userverified?email=${selleremail}`)
             .then(res => {
                 setVerify(res.data?.verified)
 
@@ -21,7 +21,7 @@ const MyWishListCard = ({ wishList }) => {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/productstatus?id=${productId}`)
+        axios.get(`https://sell-buy-laptop-server-side.vercel.app/productstatus?id=${productId}`)
             .then(res => {
                 setProductStatus(res.data?.status)
 

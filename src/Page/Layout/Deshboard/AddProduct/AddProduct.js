@@ -47,7 +47,7 @@ const AddProduct = () => {
                     date,
                     status: 'true'
                 }
-                fetch('http://localhost:5000/product', {
+                fetch('https://sell-buy-laptop-server-side.vercel.app/product', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',

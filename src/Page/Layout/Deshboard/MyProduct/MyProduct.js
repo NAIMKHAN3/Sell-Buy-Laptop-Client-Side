@@ -9,7 +9,7 @@ const MyProduct = () => {
     const [refetch, setRefetch] = useState(false)
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/userproduct?email=${user?.email}`, { headers: { authorization: `Bearer ${localStorage.getItem('token')}` } })
+        axios.get(`https://sell-buy-laptop-server-side.vercel.app/userproduct?email=${user?.email}`, { headers: { authorization: `Bearer ${localStorage.getItem('token')}` } })
             .then(res => {
                 setProducts(res.data)
 

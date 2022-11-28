@@ -1,7 +1,7 @@
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigation } from 'react-router-dom';
 import CheckOut from './CheckOut/CheckOut';
 
 
@@ -9,6 +9,17 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
 
 const Payment = () => {
     const data = useLoaderData();
+
+    const navigation = useNavigation();
+    if (navigation.state === "loading") {
+        return <div className="text-center">
+            <div class="flex justify-center items-center mt-10">
+                <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    }
 
 
     console.log(data)

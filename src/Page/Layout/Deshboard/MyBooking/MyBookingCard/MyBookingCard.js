@@ -8,8 +8,7 @@ const MyBookingCard = ({ myBooking, refetch }) => {
     const [productStatus, setProductStatus] = useState('')
 
     useEffect(() => {
-
-        axios.get(`http://localhost:5000/productstatus?id=${productId}`)
+        axios.get(`https://sell-buy-laptop-server-side.vercel.app/productstatus?id=${productId}`)
             .then(res => {
                 setProductStatus(res.data?.status)
 
@@ -19,7 +18,7 @@ const MyBookingCard = ({ myBooking, refetch }) => {
     const handleBooking = () => {
         const procced = window.confirm('Are you sure Cancel booking?')
         if (procced) {
-            fetch(`http://localhost:5000/deletebooking?id=${_id}`, {
+            fetch(`https://sell-buy-laptop-server-side.vercel.app/deletebooking?id=${_id}`, {
                 method: 'DELETE',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('token')}`
@@ -38,6 +37,7 @@ const MyBookingCard = ({ myBooking, refetch }) => {
 
 
     }
+    console.log(productStatus)
     return (
 
         <div className="card border border-orange-300 p-3">

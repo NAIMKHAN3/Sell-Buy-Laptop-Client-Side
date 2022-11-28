@@ -1,29 +1,40 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContex } from '../Share/UserContex/UserContext';
 
 const Login = () => {
     const { logIn, signInGoogle } = useContext(AuthContex);
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const Navigate = useNavigate()
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
 
     const handleSignUp = data => {
         const { email, password } = data;
         logIn(email, password)
             .then(result => {
-                fetch(`http://localhost:5000/jwt?email=${result.user.email}`)
+                fetch(`https://sell-buy-laptop-server-side.vercel.app/jwt?email=${result.user.email}`)
                     .then(res => res.json())
                     .then(data => {
                         const token = data.token;
-                        console.log(token)
+
                         localStorage.setItem('token', token)
+
                     })
-                    .catch(e => console.log(e))
-                // navigate(from, { replace: true })
+                    .catch(e => {
+
+                        console.log(e)
+                    })
                 toast.success('Log In Success')
+                Navigate(from, { replace: true })
             })
-            .catch(e => console.log(e))
+            .catch(e => {
+                toast.error(e.message)
+                console.log(e)
+            })
     }
 
     const handleGoogle = () => {
@@ -41,7 +52,7 @@ const Login = () => {
 
 
                 }
-                fetch('http://localhost:5000/user', {
+                fetch('https://sell-buy-laptop-server-side.vercel.app/user', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -50,7 +61,7 @@ const Login = () => {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        fetch(`http://localhost:5000/jwt?email=${userEmail}`)
+                        fetch(`https://sell-buy-laptop-server-side.vercel.app/jwt?email=${userEmail}`)
                             .then(res => res.json())
                             .then(data => {
                                 const token = data.token;
@@ -59,6 +70,7 @@ const Login = () => {
                             .catch(e => console.log(e))
                         // navigate(from, { replace: true })
                         toast.success('Log In Success')
+                        Navigate(from, { replace: true })
                     })
                     .catch(e => console.log(e))
             })

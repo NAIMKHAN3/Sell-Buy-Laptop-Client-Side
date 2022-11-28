@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 
 const ReportCard = ({ reportItem, refetch }) => {
+
     const { image, brand, model, reporteduser, selleremail, _id, productId } = reportItem;
     const handleDelete = () => {
         const procced = window.confirm('Are you sure deleted product?')
         if (procced) {
-            fetch(`http://localhost:5000/deletereport?id=${_id}&email=${reporteduser}&productId=${productId}`, {
+            fetch(`https://sell-buy-laptop-server-side.vercel.app/deletereport?id=${_id}&email=${reporteduser}&productId=${productId}`, {
                 method: 'DELETE',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('token')}`
@@ -24,6 +25,7 @@ const ReportCard = ({ reportItem, refetch }) => {
         }
 
     }
+
     return (
         <div className="card border border-orange-300 p-3">
             <figure><img src={image} alt="Shoes" className='lg:h-48 lg:w-full' /></figure>

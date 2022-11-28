@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { AuthContex } from '../Share/UserContex/UserContext';
@@ -6,6 +6,11 @@ import { AuthContex } from '../Share/UserContex/UserContext';
 const BookingModal = () => {
     const { user, inputModal, setInputModal } = useContext(AuthContex)
     const { model, resale, brand, _id, image, selleremail } = inputModal;
+
+
+
+
+
     const handleModal = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -17,7 +22,7 @@ const BookingModal = () => {
             username, useremail, brand, model, image, selleremail, price: resale, number, meetingLocation, productId: _id,
         }
 
-        fetch('http://localhost:5000/addmybooking', {
+        fetch('https://sell-buy-laptop-server-side.vercel.app/addmybooking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -37,9 +42,17 @@ const BookingModal = () => {
                 setInputModal(null)
             })
             .catch(e => console.log(e))
-
-
     }
+
+    // if (isLoading) {
+    //     return <div className="text-center">
+    //         <div class="flex justify-center items-center mt-10">
+    //             <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+    //                 <span class="visually-hidden">Loading...</span>
+    //             </div>
+    //         </div>
+    //     </div>
+    // }
     return (
         <div>
             <input type="checkbox" id="sell-laptop-3" className="modal-toggle" />

@@ -16,7 +16,7 @@ const CheckOut = ({ data }) => {
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://sell-buy-laptop-server-side.vercel.app/create-payment-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +80,7 @@ const CheckOut = ({ data }) => {
         selleremail: selleremail,
         location,
       }
-      fetch('http://localhost:5000/payment', {
+      fetch('https://sell-buy-laptop-server-side.vercel.app/payment', {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
@@ -92,7 +92,7 @@ const CheckOut = ({ data }) => {
         .then(data => {
           console.log(data)
           if (data.acknowledged) {
-            fetch(`http://localhost:5000/paymentproductdelete?productId=${productId}&bookingId=${_id}`, {
+            fetch(`https://sell-buy-laptop-server-side.vercel.app/paymentproductdelete?productId=${productId}&bookingId=${_id}`, {
               method: 'DELETE',
 
             })

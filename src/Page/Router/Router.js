@@ -15,10 +15,13 @@ import MyProduct from "../Layout/Deshboard/MyProduct/MyProduct";
 import MyBooking from "../Layout/Deshboard/MyBooking/MyBooking";
 import Payment from "../Layout/Deshboard/Payment/Payment";
 import MyBuyer from "../Layout/Deshboard/MyBuyer/MyBuyer";
+import Blog from "../Blog/Blog";
+import ErrorPage from "../ErrorPage/ErrorPage";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
-        path: '/', element: <Main></Main>, children: [
+        path: '/', element: <Main></Main>, errorElement: <ErrorPage></ErrorPage>, children: [
             {
                 path: '/', element: <Home></Home>
             },
@@ -28,7 +31,7 @@ export const router = createBrowserRouter([
             {
                 path: '/cetegoryitem/:id',
 
-                loader: ({ params }) => fetch(`http://localhost:5000/cetegoryitem/${params.id}`, { headers: { authorization: `Bearer ${localStorage.getItem('token')}` } }), element: <CetegoryItem></CetegoryItem>
+                loader: ({ params }) => fetch(`https://sell-buy-laptop-server-side.vercel.app/cetegoryitem/${params.id}`, { headers: { authorization: `Bearer ${localStorage.getItem('token')}` } }), element: <PrivateRoute><CetegoryItem></CetegoryItem></PrivateRoute>
             },
             {
                 path: '/login', element: <Login></Login>
@@ -36,41 +39,44 @@ export const router = createBrowserRouter([
             {
                 path: '/signup', element: <SignUp></SignUp>
             },
+            {
+                path: '/blog', element: <Blog></Blog>
+            },
         ]
     },
     {
-        path: '/deshboard', element: <Deshboard></Deshboard>, children: [
+        path: '/deshboard', element: <PrivateRoute><Deshboard></Deshboard></PrivateRoute>, errorElement: <ErrorPage></ErrorPage>, children: [
             {
-                path: '/deshboard/addproduct', element: <AddProduct></AddProduct>
+                path: '/deshboard/addproduct', element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute>
             },
             {
-                path: '/deshboard/allbuyer', element: <AllBuyer></AllBuyer>
+                path: '/deshboard/allbuyer', element: <PrivateRoute><AllBuyer></AllBuyer></PrivateRoute>
             },
             {
-                path: '/deshboard/allseller', element: <AllSeller></AllSeller>
+                path: '/deshboard/allseller', element: <PrivateRoute><AllSeller></AllSeller></PrivateRoute>
             },
             {
-                path: '/deshboard/alluser', element: <AllUser></AllUser>
+                path: '/deshboard/alluser', element: <PrivateRoute><AllUser></AllUser></PrivateRoute>
             },
             {
-                path: '/deshboard/mywishlist', element: <MyWishList></MyWishList>
+                path: '/deshboard/mywishlist', element: <PrivateRoute><MyWishList></MyWishList></PrivateRoute>
             },
             {
-                path: '/deshboard/reportitems', element: <ReportsItem></ReportsItem>
+                path: '/deshboard/reportitems', element: <PrivateRoute><ReportsItem></ReportsItem></PrivateRoute>
             },
             {
-                path: '/deshboard/myproduct', element: <MyProduct></MyProduct>
+                path: '/deshboard/myproduct', element: <PrivateRoute><MyProduct></MyProduct></PrivateRoute>
             },
             {
-                path: '/deshboard/mybooking', element: <MyBooking></MyBooking>
+                path: '/deshboard/mybooking', element: <PrivateRoute><MyBooking></MyBooking></PrivateRoute>
             },
             {
-                path: '/deshboard/mybuyer', element: <MyBuyer></MyBuyer>
+                path: '/deshboard/mybuyer', element: <PrivateRoute><MyBuyer></MyBuyer></PrivateRoute>
             },
             {
                 path: '/deshboard/payment/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/payment/${params.id}`, { headers: { authorization: `Bearer ${localStorage.getItem('token')}` } }),
-                element: <Payment></Payment>
+                loader: ({ params }) => fetch(`https://sell-buy-laptop-server-side.vercel.app/payment/${params.id}`, { headers: { authorization: `Bearer ${localStorage.getItem('token')}` } }),
+                element: <PrivateRoute><Payment></Payment></PrivateRoute>
             },
         ]
     }
