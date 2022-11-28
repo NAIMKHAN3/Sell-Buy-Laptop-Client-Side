@@ -37,6 +37,30 @@ const AllBuyer = () => {
             .catch(e => console.log(e))
     }
 
+    const handleMakeAdmin = id => {
+        setLoading(true)
+        const procced = window.confirm('Are You Sure Promotion User by Admin?')
+        if (procced) {
+            fetch(`https://sell-buy-laptop-server-side.vercel.app/makeadmin?id=${id}`, {
+                method: 'PUT',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.acknowledged) {
+                        refetch()
+                        toast.success('User Promoted by Admin')
+                        setLoading(false)
+                    }
+                })
+
+                .catch(e => console.log(e))
+        }
+
+    }
+
     const hanldleDeleteUser = (id) => {
         setLoading(true)
         const procced = window.confirm('Are You Sure Deleted User?')
@@ -96,7 +120,7 @@ const AllBuyer = () => {
                             <td>{allbuyer.name}</td>
                             <td>{allbuyer.email}</td>
                             <td>{allbuyer.role}</td>
-                            <td><button className='btn btn-primary btn-sm'>Make Admin</button></td>
+                            <td><button onClick={() => handleMakeAdmin(allbuyer._id)} className='btn btn-primary btn-sm'>Make Admin</button></td>
                             <td><button onClick={() => hanldleDeleteUser(allbuyer._id)} className='btn btn-primary btn-sm'>Delete</button></td>
                             <td>
                                 {
