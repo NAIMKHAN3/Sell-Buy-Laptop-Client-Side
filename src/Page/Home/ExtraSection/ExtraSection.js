@@ -5,7 +5,7 @@ import man from './man.json';
 const ExtraSection = () => {
     return (
         <div className='mx-auto'>
-            <Lottie className='w-[1000px] text-center mx-auto p-4' animationData={man} loop={true} />
+            <Lottie className='lg:w-[1000px] text-center mx-auto p-4' animationData={man} loop={true} />
         </div>
     );
 };
