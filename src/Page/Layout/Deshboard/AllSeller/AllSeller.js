@@ -17,7 +17,7 @@ const AllSeller = () => {
     })
     const handleVarify = id => {
         setLoading(true)
-        const procced = window.confirm('Are You Sure Verify User?')
+        const procced = window.confirm('Are You Sure Verify User?');
         if (procced) {
             fetch(`https://sell-buy-laptop-server-side.vercel.app/verifyuser?id=${id}`, {
                 method: 'PUT',
