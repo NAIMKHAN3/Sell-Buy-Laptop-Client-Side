@@ -72,7 +72,7 @@ const AllSeller = () => {
     }
 
     if (!allSellers.length) {
-        return <h1 className='my-5 text-center font-bold text-4xl text-orange-400'>Seller is Empty</h1>
+        return <h1 className='my-5 text-center font-bold text-4xl text-indigo-500'>Seller is Empty</h1>
     }
 
     const hanldleDeleteUser = (id) => {

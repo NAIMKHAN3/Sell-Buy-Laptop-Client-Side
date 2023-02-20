@@ -17,12 +17,12 @@ const MyBooking = () => {
 
     if (!myBookings.length) {
         // refetch()
-        return <h1 className=' text-center font-bold text-4xl text-orange-400 my-5'>Your Booking Empty</h1>
+        return <h1 className=' text-center font-bold text-4xl text-indigo-500 my-5'>Your Booking Empty</h1>
     }
 
     return (
         <div>
-            <h1 className='my-5 text-center font-bold text-4xl text-orange-400'>My Booking Product</h1>
+            <h1 className='my-5 text-center font-bold text-4xl text-indigo-500'>My Booking Product</h1>
             <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-3'>
                 {
                     myBookings.map(myBooking => <MyBookingCard key={myBooking._id} myBooking={myBooking} refetch={refetch}></MyBookingCard>)

@@ -15,7 +15,7 @@ const MyBuyer = () => {
     })
 
     if (!myBuyers.length) {
-        return <h1 className='my-5 text-center font-bold text-4xl text-orange-400'>Your buyer is Empty</h1>
+        return <h1 className='my-5 text-center font-bold text-4xl text-indigo-500'>Your buyer is Empty</h1>
     }
 
     return (

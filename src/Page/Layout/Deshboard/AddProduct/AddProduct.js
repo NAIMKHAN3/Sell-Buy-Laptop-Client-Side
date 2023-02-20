@@ -69,9 +69,9 @@ const AddProduct = () => {
     }
 
     return (
-        <div className=' my-30  shadow-lg  p-10'>
-            <h1 className='text-center mt-10 text-4xl font-bold text-orange-400'>Add Product</h1>
-            <form onSubmit={handleSubmit(handleAddProduct)}>
+        <div className=' my-30  shadow-lg border-indigo-300 border-2  p-10'>
+            <h1 className='text-center my-3 mt-10 text-4xl font-bold text-indigo-500'>Add Product</h1>
+            <form onSubmit={handleSubmit(handleAddProduct)} className="">
                 <div className='grid grid-cols-2 lg:grid-cols-3 gap-3 mt-10'>
                     <div className="form-control w-full mr-3">
                         <label className="label">
@@ -184,7 +184,7 @@ const AddProduct = () => {
                 </div>
                 <div className='mt-5-3'>
                 </div>
-                <input className='btn bg-orange-400 w-full my-10 border-none font-bold' type="submit" />
+                <input className='btn bg-indigo-600 w-full my-10 border-none font-bold' type="submit" />
             </form>
 
         </div>
