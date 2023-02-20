@@ -14,33 +14,33 @@ const DeshbordLayout = () => {
 
 
 
-    if (isLoading) {
-        return <div className="text-center">
-            <div class="flex justify-center items-center mt-10">
-                <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
-        </div>
-    }
-    if (loading) {
-        return <div className="text-center">
-            <div class="flex justify-center items-center mt-10">
-                <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
-        </div>
-    }
-    if (isLoadings) {
-        return <div className="text-center">
-            <div class="flex justify-center items-center mt-10">
-                <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
-        </div>
-    }
+    // if (isLoading) {
+    //     return <div className="text-center">
+    //         <div class="flex justify-center items-center mt-10">
+    //             <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+    //                 <span class="visually-hidden">Loading...</span>
+    //             </div>
+    //         </div>
+    //     </div>
+    // }
+    // if (loading) {
+    //     return <div className="text-center">
+    //         <div class="flex justify-center items-center mt-10">
+    //             <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+    //                 <span class="visually-hidden">Loading...</span>
+    //             </div>
+    //         </div>
+    //     </div>
+    // }
+    // if (isLoadings) {
+    //     return <div className="text-center">
+    //         <div class="flex justify-center items-center mt-10">
+    //             <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+    //                 <span class="visually-hidden">Loading...</span>
+    //             </div>
+    //         </div>
+    //     </div>
+    // }
 
     return (
         <div>
@@ -76,11 +76,6 @@ const DeshbordLayout = () => {
                         <li className='bg-indigo-200 text-black font-bold border rounded-lg my-1'><Link to='/deshboard/mywishlist'>My WishList</Link></li>
                         {/* </>
                         } */}
-
-
-
-
-
                     </ul>
 
                 </div>

@@ -77,8 +77,8 @@ const Login = () => {
             .catch(e => console.log(e))
     }
     return (
-        <div className='lg:w-1/3 mx-auto my-20 shadow-lg p-10'>
-            <h1 className='text-center text-4xl font-bold text-blue-500'>Log In</h1>
+        <div className='lg:w-1/3 mx-auto my-20 shadow-lg p-10 border-2 border-indigo-200'>
+            <h1 className='text-center text-4xl font-bold text-indigo-500'>Log In</h1>
             <form onSubmit={handleSubmit(handleSignUp)}>
                 <div className="form-control w-full ">
                     <label className="label">
@@ -94,7 +94,7 @@ const Login = () => {
                     <input {...register("password", { required: true })} type="password" className="input input-bordered w-full " />
                     {errors.password && <span className='text-red-500'>This field is required</span>}
                 </div>
-                <input className='btn bg-blue-500 w-full my-5 border-none font-bold' type="submit" />
+                <input className='btn bg-indigo-600 w-full my-5 border-none font-bold' type="submit" />
             </form>
             <p className='text-center'>New To Sell-Buy-Laptop Please <Link to='/signup' className='text-primary'>Sign Up</Link></p>
             <div className="flex flex-col w-full border-opacity-50">

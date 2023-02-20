@@ -8,13 +8,13 @@ const MyProduct = () => {
     const [products, setProducts] = useState([])
     const [refetch, setRefetch] = useState(false)
 
-    useEffect(() => {
-        axios.get(`https://sell-buy-laptop-server-side.vercel.app/userproduct?email=${user?.email}`, { headers: { authorization: `Bearer ${localStorage.getItem('token')}` } })
-            .then(res => {
-                setProducts(res.data)
+    // useEffect(() => {
+    //     axios.get(`https://sell-buy-laptop-server-side.vercel.app/userproduct?email=${user?.email}`, { headers: { authorization: `Bearer ${localStorage.getItem('token')}` } })
+    //         .then(res => {
+    //             setProducts(res.data)
 
-            })
-    }, [user.email, refetch])
+    //         })
+    // }, [user.email, refetch])
 
     if (!products.length) {
         return <h1 className='my-5 text-center font-bold text-4xl text-indigo-500'>Your Product is Empty</h1>

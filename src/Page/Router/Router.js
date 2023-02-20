@@ -45,33 +45,33 @@ export const router = createBrowserRouter([
         ]
     },
     {
-        path: '/deshboard', element: <PrivateRoute><Deshboard></Deshboard></PrivateRoute>, errorElement: <ErrorPage></ErrorPage>, children: [
+        path: '/deshboard', element: <Deshboard></Deshboard>, errorElement: <ErrorPage></ErrorPage>, children: [
             {
-                path: '/deshboard/addproduct', element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute>
+                path: '/deshboard/addproduct', element: <AddProduct></AddProduct>
             },
             {
-                path: '/deshboard/allbuyer', element: <PrivateRoute><AllBuyer></AllBuyer></PrivateRoute>
+                path: '/deshboard/allbuyer', element: <AllBuyer></AllBuyer>
             },
             {
-                path: '/deshboard/allseller', element: <PrivateRoute><AllSeller></AllSeller></PrivateRoute>
+                path: '/deshboard/allseller', element: <AllSeller></AllSeller>
             },
             {
-                path: '/deshboard/alluser', element: <PrivateRoute><AllUser></AllUser></PrivateRoute>
+                path: '/deshboard/alluser', element: <AllUser></AllUser>
             },
             {
-                path: '/deshboard/mywishlist', element: <PrivateRoute><MyWishList></MyWishList></PrivateRoute>
+                path: '/deshboard/mywishlist', element: <MyWishList></MyWishList>
             },
             {
-                path: '/deshboard/reportitems', element: <PrivateRoute><ReportsItem></ReportsItem></PrivateRoute>
+                path: '/deshboard/reportitems', element: <ReportsItem></ReportsItem>
             },
             {
-                path: '/deshboard/myproduct', element: <PrivateRoute><MyProduct></MyProduct></PrivateRoute>
+                path: '/deshboard/myproduct', element: <MyProduct></MyProduct>
             },
             {
-                path: '/deshboard/mybooking', element: <PrivateRoute><MyBooking></MyBooking></PrivateRoute>
+                path: '/deshboard/mybooking', element: <MyBooking></MyBooking>
             },
             {
-                path: '/deshboard/mybuyer', element: <PrivateRoute><MyBuyer></MyBuyer></PrivateRoute>
+                path: '/deshboard/mybuyer', element: <MyBuyer></MyBuyer>
             },
             {
                 path: '/deshboard/payment/:id',

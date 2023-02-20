@@ -39,7 +39,7 @@ const Navbar = () => {
                 <button onClick={signOut} className='mr-5 font-bold text-xl'>Log Out</button>
             </> : <>
 
-                <Link to='/blog' className='mr-5 font-bold text-xl' >Blog</Link>
+                {/* <Link to='/blog' className='mr-5 font-bold text-xl' >Blog</Link> */}
                 <Link className='mr-5 font-bold text-xl' to='/login'>Log In</Link>
                 <Link className='mr-5 font-bold text-xl' to='/signup'>Sign Up</Link>
             </>
@@ -53,7 +53,7 @@ const Navbar = () => {
     </>
 
     return (
-        <div className='mt-2 text-white'>
+        <div className='mt- text-white'>
             {/* <div className='flex justify-center items-center'>
                 <img className='w-16 mr-3' src={laptop} alt="" />
                 <Link to='/'> <p className=" btn-ghost text-4xl font-bold warning-content text-center mb-4 text-indigo-600">Sell-Buy-Laptop</p> </Link>

@@ -95,8 +95,8 @@ const SignUp = () => {
     }
 
     return (
-        <div className='lg:w-1/3 mx-auto my-10 shadow-lg p-10'>
-            <h1 className='text-center text-4xl font-bold text-orange-400'>Sign Up</h1>
+        <div className='lg:w-1/3 mx-auto my-10 shadow-lg p-10 border-2 border-indigo-200'>
+            <h1 className='text-center text-4xl font-bold text-indigo-400'>Sign Up</h1>
             <form onSubmit={handleSubmit(handleSignUp)}>
                 <div className='flex mt-10'>
                     <div className="form-control w-full mr-3">
@@ -132,7 +132,7 @@ const SignUp = () => {
                     <option defaultValue>buyer</option>
                     <option className='py-4'>seller</option>
                 </select>
-                <input className='btn bg-orange-400 w-full my-5 border-none font-bold' type="submit" />
+                <input className='btn bg-indigo-600 w-full my-5 border-none font-bold' type="submit" />
             </form>
             <p className='text-center'>Already Have An Account Please <Link to='/login' className='text-primary'>Log In</Link></p>
             <div className="flex flex-col w-full border-opacity-50">

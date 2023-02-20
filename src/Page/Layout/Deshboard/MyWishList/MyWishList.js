@@ -20,6 +20,13 @@ const MyWishList = () => {
     })
 
 
+
+
+    if (!wishLists.length) {
+        refetch()
+        return <h1 className=' text-center font-bold text-4xl text-indigo-500 my-5'>Your WishList is Empty</h1>
+    }
+
     if (isLoading || !user || !user?.uid) {
         return <div className="text-center">
             <div class="flex justify-center items-center mt-10">
@@ -28,11 +35,6 @@ const MyWishList = () => {
                 </div>
             </div>
         </div>
-    }
-
-    if (!wishLists.length) {
-        refetch()
-        return <h1 className=' text-center font-bold text-4xl text-indigo-500 my-5'>Your WishList is Empty</h1>
     }
 
 
