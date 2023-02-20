@@ -14,6 +14,8 @@ const AddProduct = () => {
     }
 
     const handleAddProduct = (data) => {
+        console.log(data)
+        console.log(data.image)
 
         const { brand, location, use, resale, original, model, condition, number, description } = data;
         const image = data.image[0];
@@ -179,17 +181,9 @@ const AddProduct = () => {
                         <input {...register("image", { required: true })} type="file" className="input input-bordered  file-input-ghost w-full " />
                         {errors.password && <span className='text-red-500'>This field is required</span>}
                     </div>
-
-
                 </div>
                 <div className='mt-5-3'>
-
-
-
                 </div>
-
-
-
                 <input className='btn bg-orange-400 w-full my-10 border-none font-bold' type="submit" />
             </form>
 

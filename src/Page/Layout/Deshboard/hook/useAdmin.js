@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 const useAdmin = (email) => {
-    const [isAdmin, setAdmin] = useState('')
-    const [isLoading, setIsLoading] = useState(true)
+    const [isAdmin, setAdmin] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         fetch(`https://sell-buy-laptop-server-side.vercel.app/checkadmin?email=${email}`, {
