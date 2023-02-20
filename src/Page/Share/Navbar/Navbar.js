@@ -55,7 +55,7 @@ const Navbar = () => {
                 <img className='w-16 mr-3' src={laptop} alt="" />
                 <Link to='/'> <p className=" btn-ghost text-4xl font-bold warning-content text-center mb-4">Sell-Buy-Laptop</p> </Link>
             </div>
-            <div className="navbar bg-success px-8">
+            <div className="navbar bg-indigo-400 px-8">
 
                 <div className="navbar-start">
                     <div className="dropdown">

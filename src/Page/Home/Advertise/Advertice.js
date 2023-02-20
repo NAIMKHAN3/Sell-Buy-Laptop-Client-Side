@@ -26,7 +26,7 @@ const Advertice = () => {
         <section>
             <div className='flex justify-center'>
                 <Lottie className='w-[100px] text-center p-4' animationData={add} loop={true} />
-                <h1 className='text-4xl text-orange-400 font-bold text-center my-5'>Advertice Product</h1>
+                <h1 className='text-4xl text-indigo-600 font-bold text-center my-5'>Advertice Product</h1>
             </div>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-3 my-5 px-10'>
                 {
