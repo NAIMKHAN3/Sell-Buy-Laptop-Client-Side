@@ -13,6 +13,12 @@ const ReportsItem = () => {
             return data
         }
     })
+
+    if (!allReportItems.length) {
+        refetch()
+        return <h1 className=' text-center font-bold text-4xl text-indigo-500 my-5'>Reported Item Empty</h1>
+    }
+
     if (loading) {
         return <div className="text-center">
             <div class="flex justify-center items-center mt-10">
@@ -23,10 +29,7 @@ const ReportsItem = () => {
         </div>
     }
 
-    if (!allReportItems.length) {
-        refetch()
-        return <h1 className=' text-center font-bold text-4xl text-indigo-500 my-5'>Reported Item Empty</h1>
-    }
+
 
     return (
         <div>

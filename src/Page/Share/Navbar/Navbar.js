@@ -72,7 +72,7 @@ const Navbar = () => {
                         </ul>
                     </div>
 
-                    <Link to='/' className="text-3xl font-bold text-indigo-900">SELL-Buy-Laptop</Link>
+                    <Link to='/' className="text-3xl hidden lg:block font-bold text-indigo-900">SELL-Buy-Laptop</Link>
                 </div>
                 <div className="navbar-center hidden lg:block">
                     <ul className="menu menu-horizontal p-0">

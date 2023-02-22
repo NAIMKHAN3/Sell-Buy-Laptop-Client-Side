@@ -61,6 +61,12 @@ const AllSeller = () => {
         }
 
     }
+
+    if (!allSellers.length) {
+        return <h1 className='my-5 text-center font-bold text-4xl text-indigo-500'>Seller is Empty</h1>
+    }
+
+
     if (loading) {
         return <div className="text-center">
             <div class="flex justify-center items-center mt-10">
@@ -71,9 +77,7 @@ const AllSeller = () => {
         </div>
     }
 
-    if (!allSellers.length) {
-        return <h1 className='my-5 text-center font-bold text-4xl text-indigo-500'>Seller is Empty</h1>
-    }
+
 
     const hanldleDeleteUser = (id) => {
         const procced = window.confirm('Are You Sure Deleted User?')

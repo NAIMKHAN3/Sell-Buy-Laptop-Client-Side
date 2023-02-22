@@ -83,6 +83,11 @@ const AllBuyer = () => {
         }
     }
 
+
+    if (!allbuyers.length) {
+        return <h1 className='my-5 text-center font-bold text-4xl text-indigo-500'>Buyer is Empty</h1>
+    }
+
     if (loading) {
         return <div className="text-center">
             <div class="flex justify-center items-center mt-10">
@@ -93,9 +98,6 @@ const AllBuyer = () => {
         </div>
     }
 
-    if (!allbuyers.length) {
-        return <h1 className='my-5 text-center font-bold text-4xl text-indigo-500'>Buyer is Empty</h1>
-    }
 
 
     return (

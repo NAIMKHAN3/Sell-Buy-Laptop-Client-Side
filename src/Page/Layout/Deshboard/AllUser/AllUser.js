@@ -79,6 +79,11 @@ const AllUser = () => {
         }
 
     }
+
+    if (!allUsers.length) {
+        return <h1 className='my-5 text-center font-bold text-4xl text-indigo-500'>User is Empty</h1>
+    }
+
     if (loading) {
         return <div className="text-center">
             <div class="flex justify-center items-center mt-10">
@@ -88,11 +93,6 @@ const AllUser = () => {
             </div>
         </div>
     }
-
-    if (!allUsers.length) {
-        return <h1 className='my-5 text-center font-bold text-4xl text-indigo-500'>User is Empty</h1>
-    }
-
 
     return (
         <div className="overflow-x-auto">
