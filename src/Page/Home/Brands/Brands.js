@@ -1,4 +1,5 @@
 import React from 'react';
+import BrandCard from './BrandCard';
 
 const Brands = () => {
     const brands = [
@@ -15,7 +16,7 @@ const Brands = () => {
         {
             name: "LENOVO",
             details: "Lenovo is a well-known brand that produces a range of laptops suitable for both personal and professional use. Here are some of the features and specifications of Lenovo laptops: Design: Lenovo laptops are designed to be sleek, portable, and durable. They come in a variety of form factors, including traditional clamshell, 2-in-1 convertible, and detachable tablet.",
-            img: "https://e7.pngegg.com/pngimages/960/901/png-clipart-logo-brand-lenovo-thinkpad-ideapad-strategic-blue-text.png",
+            img: "https://image.pngaaa.com/151/94151-middle.png",
         },
         {
             name: "APPLE",
@@ -32,11 +33,16 @@ const Brands = () => {
             details: "Acer is a leading manufacturer of laptops that are known for their quality, durability, and affordability. Here are some of the features and specifications of Acer laptops: Design: Acer laptops come in a variety of form factors, including traditional clamshell, 2-in-1 convertible, and gaming laptops. They are designed to be sleek and portable, making them easy to carry around.",
             img: "https://1000logos.net/wp-content/uploads/2016/09/Acer-Logo-2001.png",
         },
-
     ]
+
     return (
         <div>
-
+            <h1 className='text-4xl font-bold text-center my-10'>Brands</h1>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-10'>
+                {
+                    brands.map(brand => <BrandCard key={brand.name} brand={brand}></BrandCard>)
+                }
+            </div>
         </div>
     );
 };
