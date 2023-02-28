@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import laptop from '../Navbar/image/icon.jpg'
 import { AuthContex } from '../UserContex/UserContext';
+import { FaHome, FaSignInAlt, FaUserPlus, FaSignOutAlt, FaRegEdit, FaUsersCog, FaNewspaper } from 'react-icons/fa';
 
 const Navbar = () => {
+
     const { user, cetegorys, logOut } = useContext(AuthContex);
 
     if (!cetegorys) {
@@ -21,27 +23,49 @@ const Navbar = () => {
 
 
     const item = <>
-        <Link className='mr-5 font-bold text-xl' to='/home'>Home</Link>
+        <div className='flex justify-start lg:justify-center  items-center hover:bg-indigo-400'>
+            <FaHome className='mx-2'></FaHome>
+            <Link className='mr-5 font-bold text-xl' to='/home'>Home</Link>
+        </div>
         <div className="dropdown hidden lg:block dropdown-hover">
-            <label tabIndex={0} className="mr-5 cursor-pointer font-bold text-xl">Cetegories</label>
+            <div className='flex justify-start lg:justify-center items-center hover:bg-indigo-400'>
+                <FaNewspaper className='mx-2'></FaNewspaper>
+                <label tabIndex={0} className="mr-5 cursor-pointer font-bold text-xl">Cetegories</label>
+            </div>
             <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 text-black">
                 {
-                    cetegorys.map(cetegory => <li key={cetegory._id}><Link to={`/cetegoryitem/${cetegory._id}`}>{cetegory.name}</Link></li>)
+                    cetegorys.map(cetegory => <li key={cetegory._id}><Link to={`/cetegoryitem/${cetegory._id}`} className="hover:bg-indigo-400">{cetegory.name}</Link></li>)
                 }
             </ul>
         </div>
-        <Link className='mr-5 font-bold text-xl' to='/deshboard'>Deshboard</Link>
-        <Link to='/blog' className='mr-5 font-bold text-xl' >Blog</Link>
+        <div className='flex justify-start lg:justify-center items-center hover:bg-indigo-400'>
+            <FaUsersCog className='mx-2'></FaUsersCog>
+            <Link className='mr-5 font-bold text-xl' to='/deshboard'>Deshboard</Link>
+        </div>
+        <div className='flex justify-start lg:justify-center items-center hover:bg-indigo-400'>
+            <FaRegEdit className='mx-2'></FaRegEdit>
+            <Link to='/blog' className='mr-5 font-bold text-xl'>Blog</Link>
+        </div>
+
         {
             user?.uid ? <>
                 {/* <Link className='mr-5 font-bold text-xl' to='/deshboard'>Deshboard</Link>
                 <Link to='/blog' className='mr-5 font-bold text-xl' >Blog</Link> */}
-                <button onClick={signOut} className='mr-5 font-bold text-xl'>Log Out</button>
+                <div className='flex justify-start lg:justify-center items-center'>
+                    <FaSignOutAlt className='mx-2'></FaSignOutAlt>
+                    <button onClick={signOut} className='mr-5 font-bold text-xl hover:bg-indigo-400'>Log Out</button>
+                </div>
             </> : <>
 
                 {/* <Link to='/blog' className='mr-5 font-bold text-xl' >Blog</Link> */}
-                <Link className='mr-5 font-bold text-xl' to='/login'>Log In</Link>
-                <Link className='mr-5 font-bold text-xl' to='/signup'>Sign Up</Link>
+                <div className='flex justify-start lg:justify-center items-center hover:bg-indigo-400'>
+                    <FaSignInAlt className='mx-2'></FaSignInAlt>
+                    <Link className='mr-5 font-bold text-xl' to='/login'>Log In</Link>
+                </div>
+                <div className='flex justify-start lg:justify-center items-center hover:bg-indigo-400'>
+                    <FaUserPlus className='mx-2'></FaUserPlus>
+                    <Link className='mr-5 font-bold text-xl' to='/signup'>Sign Up</Link>
+                </div>
             </>
         }
 
