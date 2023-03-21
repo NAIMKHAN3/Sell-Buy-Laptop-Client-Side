@@ -120,7 +120,7 @@ const Navbar = () => {
                 </div>
                 <div className="avatar hidden lg:block">
                     <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                        <img src="https://www.shutterstock.com/image-photo/portrait-business-man-on-background-260nw-595165913.jpg" />
+                        <img src={user.photoURL} alt='' />
                     </div>
                 </div>
             </div >
