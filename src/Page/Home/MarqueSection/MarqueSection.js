@@ -35,7 +35,7 @@ const MarqueSection = () => {
             {brands.map((brand, i) => (
                 <div className='zoom' key={i}>
                     <div className='border rounded-md shadow-lg w-48 text-center bg-dark m-3 '>
-                        <img className='w-24 h-24 mx-auto my-3' src={image(brand)} alt="" />
+                        <img className='w-24 h-24 rounded-full mx-auto my-3' src={image(brand)} alt="" />
                         <h1 className='text-slate-500'>{brand}</h1>
                     </div>
                 </div>
