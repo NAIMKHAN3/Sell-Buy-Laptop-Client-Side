@@ -5,6 +5,7 @@ import { Link, } from 'react-router-dom';
 import laptop from '../Navbar/image/icon.jpg'
 import { AuthContex } from '../UserContex/UserContext';
 import { IoMdArrowDropdown } from "react-icons/io";
+import { CgProfile } from "react-icons/cg";
 import { FaHome, FaSignInAlt, FaUserPlus, FaSignOutAlt, FaRegEdit, FaUsersCog, FaNewspaper } from 'react-icons/fa';
 
 const Navbar = () => {
@@ -119,8 +120,10 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div className="avatar hidden lg:block">
-                    <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                        <img src={user.photoURL} alt='' />
+                    <div className="w-12 rounded-full ring ring-offset-base-100 ring-offset-2 cursor-pointer">
+                        {
+                            user?.photoURL ? <img title={user.displayName} src={user.photoURL} alt='' /> : <CgProfile title='Not User' className='w-full h-full p-1' />
+                        }
                     </div>
                 </div>
             </div >
