@@ -45,13 +45,13 @@ const DeshbordLayout = () => {
     return (
         <div>
             <Navbar></Navbar>
-            <div className="drawer drawer-mobile">
+            <div className="drawer drawer-mobile mt-3">
                 <input id="deshbord-drawer" type="checkbox" className="drawer-toggle" />
                 <div style={{}} className="drawer-content -10 p-5">
                     <h1 className='text-2xl font-bold text-indigo-400 m-3'>Welcome to deshboard</h1>
                     <Outlet></Outlet>
                 </div>
-                <div className="drawer-side lg:bg-indigo-400">
+                <div className="drawer-side lg:bg-indigo-400 rounded-xl">
                     <label htmlFor="deshbord-drawer" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 text-white">
 
