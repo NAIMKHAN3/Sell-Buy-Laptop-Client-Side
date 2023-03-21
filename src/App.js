@@ -13,7 +13,7 @@ const queryClient = new QueryClient()
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <div style={{ fontFamily: 'Labrada', fontSize: '18px' }}>
+      <div style={{ fontFamily: 'Labrada', fontSize: '18px' }} className="max-w-7xl mx-auto">
         <RouterProvider router={router}></RouterProvider>
         <Toaster></Toaster>
       </div>

@@ -7,10 +7,6 @@ const BookingModal = () => {
     const { user, inputModal, setInputModal } = useContext(AuthContex)
     const { model, resale, brand, _id, image, selleremail } = inputModal;
 
-
-
-
-
     const handleModal = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -65,19 +61,19 @@ const BookingModal = () => {
                             <label className="label">
                                 <span className="label-text">Your Name</span>
                             </label>
-                            <input name='name' type="text" disabled defaultValue={user?.displayName} className="input input-bordered" />
+                            <input name='name' type="text" disabled value={user?.displayName} className="input input-bordered" />
                             <label className="label">
                                 <span className="label-text">Your Email</span>
                             </label>
-                            <input name='email' type="text" disabled defaultValue={user?.email} className="input input-bordered" />
+                            <input name='email' type="text" disabled value={user?.email} className="input input-bordered" />
                             <label className="label">
                                 <span className="label-text">Product Name</span>
                             </label>
-                            <input name='model' type="text" disabled defaultValue={model} className="input input-bordered" />
+                            <input name='model' type="text" disabled value={model} className="input input-bordered" />
                             <label className="label">
                                 <span className="label-text">Price</span>
                             </label>
-                            <input name='price' type="text" disabled defaultValue={resale} className="input input-bordered" />
+                            <input name='price' type="text" disabled value={resale} className="input input-bordered" />
                             <label className="label">
                                 <span className="label-text">Phone Number</span>
                             </label>

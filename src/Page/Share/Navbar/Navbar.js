@@ -1,9 +1,10 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, } from 'react';
 import toast from 'react-hot-toast';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 import laptop from '../Navbar/image/icon.jpg'
 import { AuthContex } from '../UserContex/UserContext';
+import { IoMdArrowDropdown } from "react-icons/io";
 import { FaHome, FaSignInAlt, FaUserPlus, FaSignOutAlt, FaRegEdit, FaUsersCog, FaNewspaper } from 'react-icons/fa';
 
 const Navbar = () => {
@@ -31,6 +32,7 @@ const Navbar = () => {
             <div className='flex justify-start lg:justify-center items-center hover:bg-indigo-400'>
                 <FaNewspaper className='mx-2'></FaNewspaper>
                 <label tabIndex={0} className="mr-5 cursor-pointer font-bold text-xl">Cetegories</label>
+                <span><IoMdArrowDropdown /></span>
             </div>
             <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 text-black">
                 {
@@ -82,7 +84,7 @@ const Navbar = () => {
                 <img className='w-16 mr-3' src={laptop} alt="" />
                 <Link to='/'> <p className=" btn-ghost text-4xl font-bold warning-content text-center mb-4 text-indigo-600">Sell-Buy-Laptop</p> </Link>
             </div> */}
-            <div className="navbar bg-indigo-500 px-8">
+            <div className="navbar bg-indigo-400 px-8 rounded-full mt-3">
 
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -96,7 +98,7 @@ const Navbar = () => {
                         </ul>
                     </div>
 
-                    <Link to='/' className="text-3xl hidden lg:block font-bold text-indigo-900">SELL-Buy-Laptop</Link>
+                    <Link to='/' className="text-3xl hidden lg:block font-bold">Sell-Buy-Laptop</Link>
                 </div>
                 <div className="navbar-center hidden lg:block">
                     <ul className="menu menu-horizontal p-0">

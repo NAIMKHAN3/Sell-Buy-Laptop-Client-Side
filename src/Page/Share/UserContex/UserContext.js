@@ -15,6 +15,7 @@ const UserContext = ({ children }) => {
     const [inputModal, setInputModal] = useState(null);
     const [loading, setLoading] = useState(true)
 
+
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)
     }

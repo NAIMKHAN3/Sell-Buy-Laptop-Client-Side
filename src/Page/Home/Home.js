@@ -6,15 +6,17 @@ import Contact from './Contact/Contact';
 import ExtraSection from './ExtraSection/ExtraSection';
 import Features from './Features/Features';
 import Header from './Header/Header';
+import MarqueSection from './MarqueSection/MarqueSection';
 
 const Home = () => {
     return (
         <div>
             <Header></Header>
-            <Features></Features>
-            <Brands></Brands>
+            <MarqueSection></MarqueSection>
             <Advertice></Advertice>
             <Cetegory></Cetegory>
+            <Features></Features>
+            <Brands></Brands>
             <ExtraSection></ExtraSection>
             <Contact></Contact>
         </div>

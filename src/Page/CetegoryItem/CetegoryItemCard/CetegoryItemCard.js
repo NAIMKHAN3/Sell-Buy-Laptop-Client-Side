@@ -97,7 +97,7 @@ const CetegoryItemCard = ({ product }) => {
     // }
 
     return (
-        <div className="bg-base-200">
+        <div className="shadow-lg rounded-xl">
             {
                 status === 'true' && <p className='pl-3 pt-3 text-green-600 font-bold'>Available</p>
             }

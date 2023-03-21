@@ -1,7 +1,14 @@
 import React from 'react';
 import FeatureCard from './FeatureCard';
+import { MdSell } from "react-icons/md";
+import { AiOutlineShopping } from "react-icons/ai";
+import { CgPerformance } from "react-icons/cg";
 
 const Features = () => {
+
+    const icon = [
+        <MdSell />, <AiOutlineShopping />, <CgPerformance />
+    ]
 
     const features = [
         {
@@ -20,10 +27,10 @@ const Features = () => {
 
     return (
         <div className='mx-3'>
-            <h1 className='text-4xl font-bold  text-center my-10'>Features</h1>
+            <h1 className='text-4xl font-bold  text-center my-10 text-slate-500'>Features</h1>
             <div className='grid grid-cols-1 lg:grid-cols-3'>
                 {
-                    features.map(feature => <FeatureCard key={feature.name} feature={feature}></FeatureCard>)
+                    features.map((feature, i) => <FeatureCard key={feature.name} feature={feature} icon={icon[i]}></FeatureCard>)
                 }
             </div>
         </div>
