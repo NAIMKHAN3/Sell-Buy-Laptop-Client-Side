@@ -1,13 +1,13 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth'
-import app from '../Firebase.config';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth'
 import axios from 'axios';
+import auth from '../Firebase.config';
 
 
 
 export const AuthContex = createContext([])
 
-const auth = getAuth(app);
+
 const provider = new GoogleAuthProvider();
 const UserContext = ({ children }) => {
     const [user, setUser] = useState({})
@@ -16,19 +16,19 @@ const UserContext = ({ children }) => {
     const [loading, setLoading] = useState(true)
 
 
-    const createUser = (email, password) => {
-        return createUserWithEmailAndPassword(auth, email, password)
-    }
+    // const createUser = (email, password) => {
+    //     return createUserWithEmailAndPassword(auth, email, password)
+    // }
 
     const updateUser = (name) => {
         setLoading(false)
         return updateProfile(auth.currentUser, { displayName: name })
     }
 
-    const logIn = (email, password) => {
-        setLoading(false)
-        return signInWithEmailAndPassword(auth, email, password)
-    }
+    // const logIn = (email, password) => {
+    //     setLoading(false)
+    //     return signInWithEmailAndPassword(auth, email, password)
+    // }
 
     const logOut = () => {
         setLoading(false)
@@ -41,13 +41,13 @@ const UserContext = ({ children }) => {
     }
 
 
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, currentUser => {
-            setUser(currentUser)
-            setLoading(false)
-            return () => unsubscribe();
-        })
-    }, [])
+    // useEffect(() => {
+    //     const unsubscribe = onAuthStateChanged(auth, currentUser => {
+    //         setUser(currentUser)
+    //         setLoading(false)
+    //         return () => unsubscribe();
+    //     })
+    // }, [])
 
 
     useEffect(() => {
@@ -59,7 +59,7 @@ const UserContext = ({ children }) => {
 
 
     return (
-        <AuthContex.Provider value={{ loading, inputModal, setInputModal, user, cetegorys, createUser, updateUser, logIn, logOut, signInGoogle }}>
+        <AuthContex.Provider value={{ loading, inputModal, setInputModal, user, cetegorys, updateUser, logOut, signInGoogle }}>
             {children}
         </AuthContex.Provider>
     );

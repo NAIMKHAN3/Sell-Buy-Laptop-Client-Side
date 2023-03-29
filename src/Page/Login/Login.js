@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { googleLogin, loginUser } from '../../app/features/auth/authSlice';
 import { AuthContex } from '../Share/UserContex/UserContext';
 
 const Login = () => {
@@ -10,71 +12,72 @@ const Login = () => {
     const Navigate = useNavigate()
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
+    const dispatch = useDispatch();
 
 
     const handleSignUp = data => {
         const { email, password } = data;
-        logIn(email, password)
-            .then(result => {
-                fetch(`https://sell-buy-laptop-server-side.vercel.app/jwt?email=${result.user.email}`)
-                    .then(res => res.json())
-                    .then(data => {
-                        const token = data.token;
+        dispatch(loginUser({ email, password }))
+        // logIn(email, password)
+        //     .then(result => {
+        //         fetch(`https://sell-buy-laptop-server-side.vercel.app/jwt?email=${result.user.email}`)
+        //             .then(res => res.json())
+        //             .then(data => {
+        //                 const token = data.token;
 
-                        localStorage.setItem('token', token)
+        //                 localStorage.setItem('token', token)
 
-                    })
-                    .catch(e => {
+        //             })
+        //             .catch(e => {
 
-                        console.log(e)
-                    })
-                toast.success('Log In Success')
-                Navigate(from, { replace: true })
-            })
-            .catch(e => {
-                toast.error(e.message)
-                console.log(e)
-            })
+        //                 console.log(e)
+        //             })
+        //         toast.success('Log In Success')
+        //         Navigate(from, { replace: true })
+        //     })
+        //     .catch(e => {
+        //         toast.error(e.message)
+        //         console.log(e)
+        //     })
     }
 
     const handleGoogle = () => {
-        signInGoogle()
-            .then(result => {
-                console.log(result)
-                const userEmail = result.user.email;
-                const email = result.user.email;
-                const name = result.user.displayName;
-                const user = {
-                    name,
-                    email,
-                    role: "buyer",
-                    verified: "false"
-
-
-                }
-                fetch('https://sell-buy-laptop-server-side.vercel.app/user', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(user)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        fetch(`https://sell-buy-laptop-server-side.vercel.app/jwt?email=${userEmail}`)
-                            .then(res => res.json())
-                            .then(data => {
-                                const token = data.token;
-                                localStorage.setItem('token', token)
-                            })
-                            .catch(e => console.log(e))
-                        // navigate(from, { replace: true })
-                        toast.success('Log In Success')
-                        Navigate(from, { replace: true })
-                    })
-                    .catch(e => console.log(e))
-            })
-            .catch(e => console.log(e))
+        dispatch(googleLogin())
+        // signInGoogle()
+        //     .then(result => {
+        //         console.log(result)
+        //         const userEmail = result.user.email;
+        //         const email = result.user.email;
+        //         const name = result.user.displayName;
+        //         const user = {
+        //             name,
+        //             email,
+        //             role: "buyer",
+        //             verified: "false"
+        //         }
+        //         fetch('https://sell-buy-laptop-server-side.vercel.app/user', {
+        //             method: 'POST',
+        //             headers: {
+        //                 'content-type': 'application/json'
+        //             },
+        //             body: JSON.stringify(user)
+        //         })
+        //             .then(res => res.json())
+        //             .then(data => {
+        //                 fetch(`https://sell-buy-laptop-server-side.vercel.app/jwt?email=${userEmail}`)
+        //                     .then(res => res.json())
+        //                     .then(data => {
+        //                         const token = data.token;
+        //                         localStorage.setItem('token', token)
+        //                     })
+        //                     .catch(e => console.log(e))
+        //                 // navigate(from, { replace: true })
+        //                 toast.success('Log In Success')
+        //                 Navigate(from, { replace: true })
+        //             })
+        //             .catch(e => console.log(e))
+        //     })
+        //     .catch(e => console.log(e))
     }
     return (
         <div className='lg:w-1/3 mx-auto my-20 shadow-lg p-10 border-2 border-indigo-200'>

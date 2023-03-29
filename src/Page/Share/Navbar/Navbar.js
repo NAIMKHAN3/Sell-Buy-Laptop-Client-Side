@@ -7,17 +7,23 @@ import { AuthContex } from '../UserContex/UserContext';
 import { IoMdArrowDropdown } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { FaHome, FaSignInAlt, FaUserPlus, FaSignOutAlt, FaRegEdit, FaUsersCog, FaNewspaper } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { signOut } from 'firebase/auth';
+import { logOut } from '../../../app/features/auth/authSlice';
+import auth from '../Firebase.config';
 
 const Navbar = () => {
-
-    const { user, cetegorys, logOut } = useContext(AuthContex);
+    const dispatch = useDispatch();
+    const { user, cetegorys, } = useContext(AuthContex);
+    const { user: { email } } = useSelector(state => state.auth)
 
     if (!cetegorys) {
         return
     }
-    const signOut = () => {
-        logOut()
+    const handleSignOut = () => {
+        signOut(auth)
             .then(result => {
+                dispatch(logOut())
                 toast.success('Log Out Success')
             })
     }
@@ -51,12 +57,12 @@ const Navbar = () => {
         </div>
 
         {
-            user?.uid ? <>
+            email ? <>
                 {/* <Link className='mr-5 font-bold text-xl' to='/deshboard'>Deshboard</Link>
                 <Link to='/blog' className='mr-5 font-bold text-xl' >Blog</Link> */}
                 <div className='flex justify-start lg:justify-center items-center'>
                     <FaSignOutAlt className='mx-2'></FaSignOutAlt>
-                    <button onClick={signOut} className='mr-5 font-bold text-xl hover:bg-indigo-400'>Log Out</button>
+                    <button onClick={handleSignOut} className='mr-5 font-bold text-xl hover:bg-indigo-400'>Log Out</button>
                 </div>
             </> : <>
 

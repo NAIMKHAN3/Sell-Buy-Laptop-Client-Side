@@ -1,101 +1,107 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { createUser, googleLogin } from '../../app/features/auth/authSlice';
 import { AuthContex } from '../Share/UserContex/UserContext';
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser, updateUser, signInGoogle } = useContext(AuthContex);
+    const { updateUser, signInGoogle } = useContext(AuthContex);
 
     const Navigate = useNavigate()
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
+    const dispatch = useDispatch();
 
 
     const handleSignUp = data => {
         const { firstname, lastname, email, password, role, } = data;
         const name = firstname + ' ' + lastname;
+        console.log(email, password)
+        dispatch(createUser({ email, password }))
 
-        createUser(email, password)
-            .then(result => {
+        // createUser(email, password)
+        //     .then(result => {
 
-                const userEmail = result.user?.email
-                const user = {
-                    name,
-                    email: result.user?.email,
-                    role,
-                    verified: "false"
-                }
-                updateUser(name)
-                    .then(result => { })
-                    .catch(e => console.log(e))
-                fetch('https://sell-buy-laptop-server-side.vercel.app/user', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(user)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        fetch(`https://sell-buy-laptop-server-side.vercel.app/jwt?email=${userEmail}`)
-                            .then(res => res.json())
-                            .then(data => {
-                                const token = data.token;
-                                console.log(token)
-                                localStorage.setItem('token', token)
-                            })
-                            .catch(e => console.log(e))
-                        // navigate(from, { replace: true })
-                        toast.success('Sign Up Success')
-                        Navigate(from, { replace: true })
-                    })
-                    .catch(e => console.log(e))
-            })
-            .catch(e => console.log(e))
+        //         const userEmail = result.user?.email
+        //         const user = {
+        //             name,
+        //             email: result.user?.email,
+        //             role,
+        //             verified: "false"
+        //         }
+        //         updateUser(name)
+        //             .then(result => { })
+        //             .catch(e => console.log(e))
+        //         fetch('https://sell-buy-laptop-server-side.vercel.app/user', {
+        //             method: 'POST',
+        //             headers: {
+        //                 'content-type': 'application/json'
+        //             },
+        //             body: JSON.stringify(user)
+        //         })
+        //             .then(res => res.json())
+        //             .then(data => {
+        //                 fetch(`https://sell-buy-laptop-server-side.vercel.app/jwt?email=${userEmail}`)
+        //                     .then(res => res.json())
+        //                     .then(data => {
+        //                         const token = data.token;
+        //                         console.log(token)
+        //                         localStorage.setItem('token', token)
+        //                     })
+        //                     .catch(e => console.log(e))
+        //                 // navigate(from, { replace: true })
+        //                 toast.success('Sign Up Success')
+        //                 Navigate(from, { replace: true })
+        //             })
+        //             .catch(e => console.log(e))
+        //     })
+        //     .catch(e => console.log(e))
     }
 
     const handleGoogle = () => {
-        signInGoogle()
-            .then(result => {
-                const userEmail = result.user.email;
-                const email = result.user.email;
-                const name = result.user.displayName;
-                const user = {
-                    name,
-                    email,
-                    role: "buyer",
-                    verified: "false"
-                }
-                fetch('https://sell-buy-laptop-server-side.vercel.app/user', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(user)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        fetch(`https://sell-buy-laptop-server-side.vercel.app/jwt?email=${userEmail}`)
-                            .then(res => res.json())
-                            .then(data => {
-                                const token = data.token;
-                                console.log(token)
-                                localStorage.setItem('token', token)
-                            })
-                            .catch(e => console.log(e))
-                        // navigate(from, { replace: true })
-                        toast.success('Sign Up Success')
-                        Navigate(from, { replace: true })
-                    })
-                    .catch(e => console.log(e))
-            })
-            .catch(e => console.log(e))
+        dispatch(googleLogin())
+        // signInGoogle()
+        //     .then(result => {
+        //         const userEmail = result.user.email;
+        //         const email = result.user.email;
+        //         const name = result.user.displayName;
+        //         const user = {
+        //             name,
+        //             email,
+        //             role: "buyer",
+        //             verified: "false"
+        //         }
+        //         fetch('https://sell-buy-laptop-server-side.vercel.app/user', {
+        //             method: 'POST',
+        //             headers: {
+        //                 'content-type': 'application/json'
+        //             },
+        //             body: JSON.stringify(user)
+        //         })
+        //             .then(res => res.json())
+        //             .then(data => {
+        //                 fetch(`https://sell-buy-laptop-server-side.vercel.app/jwt?email=${userEmail}`)
+        //                     .then(res => res.json())
+        //                     .then(data => {
+        //                         const token = data.token;
+        //                         console.log(token)
+        //                         localStorage.setItem('token', token)
+        //                     })
+        //                     .catch(e => console.log(e))
+        //                 // navigate(from, { replace: true })
+        //                 toast.success('Sign Up Success')
+        //                 Navigate(from, { replace: true })
+        //             })
+        //             .catch(e => console.log(e))
+        //     })
+        //     .catch(e => console.log(e))
     }
 
     return (
-        <div className='lg:w-1/3 mx-auto my-10 shadow-lg p-10 border-2 border-indigo-200'>
+        <div className='lg:w-1/3 mx-auto my-10 shadow-lg p-10 border-2 rounded-xl'>
             <h1 className='text-center text-4xl font-bold text-indigo-400'>Sign Up</h1>
             <form onSubmit={handleSubmit(handleSignUp)}>
                 <div className='flex mt-10'>
